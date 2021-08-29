@@ -1,12 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rowdies&display=swap");
+
+root {
+  font-size: 18px;
+}
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Akaya Kanadaka", "Segoe UI",
+  font-family: -apple-system, BlinkMacSystemFont, "Rowdies", "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
 }
 
 code {

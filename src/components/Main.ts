@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Main = styled.div`
-  font-family: "Akaya Kanadaka", sans-serif;
+  font-family: "Rowdies", sans-serif;
   font-size: 18px;
   color: #00f783;
   box-sizing: border-box;
