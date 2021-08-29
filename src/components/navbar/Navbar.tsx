@@ -4,16 +4,30 @@ import {
   NavContainer,
   NavWrapper,
   CompanyName,
+  NavLinksContainer,
+  NavLink,
+  Bars,
+  ButtonLink,
 } from "./NavbarElements";
 import MyLogo from "../../img/logo512.png";
 
 const Navbar = () => (
   <NavContainer>
     <NavWrapper>
-      <LogoAndNameContainer>
+      <LogoAndNameContainer to="/">
         <Logo src={MyLogo} alt="/" />
-        <CompanyName>Name</CompanyName>
+        <CompanyName>SC</CompanyName>
       </LogoAndNameContainer>
+      <Bars />
+      <NavLinksContainer>
+        <NavLink to="/">Live Matches</NavLink>
+        <NavLink to="/">Results</NavLink>
+        <NavLink to="/">Fixtures</NavLink>
+        <NavLink to="/">All Leagues</NavLink>
+      </NavLinksContainer>
+      <NavLinksContainer>
+        <ButtonLink to="/">Sign Up</ButtonLink>
+      </NavLinksContainer>
     </NavWrapper>
   </NavContainer>
 );
