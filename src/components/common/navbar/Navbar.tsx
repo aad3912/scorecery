@@ -1,13 +1,13 @@
 import {
+  Bars,
+  ButtonLink,
+  CompanyName,
   Logo,
   LogoAndNameContainer,
   NavContainer,
-  NavWrapper,
-  CompanyName,
-  NavLinksContainer,
   NavLink,
-  Bars,
-  ButtonLink,
+  NavLinksContainer,
+  NavWrapper,
 } from "./NavbarElements";
 import MyLogo from "../../../img/logo512.png";
 
