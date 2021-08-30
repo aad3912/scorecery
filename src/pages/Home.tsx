@@ -1,5 +1,6 @@
 import Button from "../components/common/Button";
 import Navbar from "../components/common/navbar/Navbar";
+import Footer from "../components/common/footer/Footer";
 import axios from "axios";
 
 const Home = () => {
@@ -46,6 +47,7 @@ const Home = () => {
       >
         Get list of Leagues
       </Button>
+      <Footer />
     </>
   );
 };
