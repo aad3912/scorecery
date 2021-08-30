@@ -4,6 +4,10 @@ import axios from "axios";
 
 const Home = () => {
   type LocationT = `/${string}`;
+  type LeagueParamsT = {
+    current: "true" | "false";
+    code: string;
+  };
 
   const getFromApi = async (location: LocationT, parameters: GetParamsT) => {
     try {
@@ -22,11 +26,6 @@ const Home = () => {
   };
 
   const getLeagues = () => {
-    type LeagueParamsT = {
-      current: "true" | "false";
-      code: string;
-    };
-
     const params: LeagueParamsT = {
       current: "true",
       code: "GB",
