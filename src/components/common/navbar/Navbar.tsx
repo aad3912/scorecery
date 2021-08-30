@@ -9,7 +9,7 @@ import {
   Bars,
   ButtonLink,
 } from "./NavbarElements";
-import MyLogo from "../../img/logo512.png";
+import MyLogo from "../../../img/logo512.png";
 
 const Navbar = () => (
   <NavContainer>

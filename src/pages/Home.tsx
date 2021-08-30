@@ -1,5 +1,5 @@
 import Button from "../components/common/Button";
-import Navbar from "../components/navbar/Navbar";
+import Navbar from "../components/common/navbar/Navbar";
 import axios from "axios";
 
 const Home = () => {
