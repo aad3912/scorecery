@@ -5,12 +5,12 @@ import { FaBars } from "react-icons/fa";
 export const NavContainer = styled.nav`
   width: 100%;
   height: 80px;
-  /* margin-top: -80px; */
   background-color: #37003c;
+  font-size: 1rem;
+  /* margin-top: -80px; */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
   position: sticky;
   top: 0;
   z-index: 10;
