@@ -1,29 +1,31 @@
 import styled from "styled-components";
 
 interface ButtonPropsT {
-  width?: numInPx;
   height: numInPx;
   bgColor: string;
   color: string;
   borderRadius: numInPx | numInPct;
   largeFont?: boolean;
   border?: boolean;
+  display?: string;
 }
 
 const Button = styled.button`
   min-width: max-content;
-  height: ${(props: ButtonPropsT) => props.height};
-  background-color: ${(props: ButtonPropsT) => props.bgColor};
-  color: ${(props: ButtonPropsT) => props.color};
+  height: ${({ height }: ButtonPropsT) => height};
+  background-color: ${({ bgColor }: ButtonPropsT) => bgColor};
+  color: ${({ color }: ButtonPropsT) => color};
   border: 3px solid
-    ${(props: ButtonPropsT) => (props.border ? props.color : props.bgColor)};
-  border-radius: ${(props) => props.borderRadius};
+    ${({ border, color, bgColor }: ButtonPropsT) => (border ? color : bgColor)};
+  border-radius: 10px;
   text-decoration: none;
-  font-size: ${(props: ButtonPropsT) => (props.largeFont ? "1.5rem" : "1rem")};
+  font-size: ${({ largeFont }: ButtonPropsT) =>
+    largeFont ? "1.3rem" : "1rem"};
   padding: 7px 14px 7px 14px;
   cursor: pointer;
   transition: 0.2s all ease-in;
   font-weight: bold;
+  text-align: center;
 
   &:hover {
     border: 3px solid
