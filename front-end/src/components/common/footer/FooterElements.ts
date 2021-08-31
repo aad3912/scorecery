@@ -19,7 +19,7 @@ export const FooterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 30px;
-  padding: 20px 0px 20px 0px;
+  padding: 20px 0px;
 
   @media screen and (max-width: 800px) {
     width: 90%;

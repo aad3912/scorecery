@@ -20,10 +20,10 @@ const Navbar = () => (
       </LogoAndNameContainer>
       <Bars />
       <NavLinksContainer>
-        <NavLink to="/">Live Matches</NavLink>
-        <NavLink to="/">Results</NavLink>
-        <NavLink to="/">Fixtures</NavLink>
-        <NavLink to="/">All Leagues</NavLink>
+        <NavLink to="/">Leagues</NavLink>
+        <NavLink to="/">Cups</NavLink>
+        <NavLink to="/">Teams</NavLink>
+        <NavLink to="/">Players</NavLink>
       </NavLinksContainer>
       <NavLinksContainer>
         <ButtonLink to="/">Sign Up</ButtonLink>
