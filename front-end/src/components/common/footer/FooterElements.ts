@@ -42,7 +42,6 @@ export const FooterLogoAndName = styled(LinkR)`
 `;
 
 export const FooterCompanyName = styled.h1`
-  font-size: 2rem;
 `;
 
 export const FooterLogo = styled.img`

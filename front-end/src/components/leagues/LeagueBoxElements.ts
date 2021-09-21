@@ -14,6 +14,7 @@ export const LeagueBoxWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   padding: 20px 0;
 
   @media screen and (max-width: 800px) {

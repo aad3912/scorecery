@@ -5,7 +5,6 @@ import Loading from "../common/Loading";
 
 const INITIAL_ID = -1;
 const NOT_RETRIEVED = false;
-const RETRIEVED = true;
 const dummy: LeagueT[] = [
   { name: "Premier League", id: 39, country: { name: "England", code: "GB" } },
   { name: "Ligue 1", id: 61, country: { name: "France", code: "FR" } },
@@ -23,14 +22,15 @@ const LeagueBox = () => {
   }, []);
 
   useEffect(() => {
+    setRetrieved(false);
     setSelectedId((selectedId) =>
-      selectedId === INITIAL_ID
-        ? data.length
+      data.length
+        ? selectedId === INITIAL_ID
           ? data[0].id
-          : INITIAL_ID
-        : selectedId
+          : selectedId
+        : INITIAL_ID
     );
-    setRetrieved(RETRIEVED);
+    setRetrieved(true);
   }, [data]);
 
   const justifyAccordingly = {
@@ -52,11 +52,13 @@ const LeagueBox = () => {
               ......
             </Loading>
           ) : (
-            <HorizontalSlider
-              selectedId={selectedId}
-              data={data}
-              setSelectedId={setSelectedId}
-            />
+            <>
+              <HorizontalSlider
+                selectedId={selectedId}
+                data={data}
+                setSelectedId={setSelectedId}
+              />
+            </>
           )
         ) : (
           <Loading>

@@ -51,9 +51,7 @@ export const Logo = styled.img`
   height: 80%;
 `;
 
-export const CompanyName = styled.h1`
-  font-size: 2rem;
-`;
+export const CompanyName = styled.h1``;
 
 export const NavLinksContainer = styled.div`
   height: 75%;
