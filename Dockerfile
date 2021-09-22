@@ -1,7 +1,7 @@
 FROM node:latest
 COPY front-end/ front-end/
 RUN cd front-end && yarn install && yarn run build
-RUN yarn install -g serve
+RUN yarn global add serve
 RUN serve -s front-end/build
 # RUN cd ..
 # COPY back-end/src src/
