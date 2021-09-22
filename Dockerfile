@@ -1,10 +1,8 @@
 FROM node:latest
 COPY front-end/ front-end/
-RUN cd front-end
-RUN yarn install
-RUN yarn run build
+RUN cd front-end && yarn install && yarn run build
 RUN yarn install -g serve
-RUN serve -s build
+RUN serve -s front-end/build
 # RUN cd ..
 # COPY back-end/src src/
 # COPY back-end/package.json package.json
