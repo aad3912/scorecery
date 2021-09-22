@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import HorizontalSlider from "../horizontal-slider/HorizontalSlider";
+import HorizontalSlider from "../widgets/horizontal-slider/HorizontalSlider";
 import { LeagueBoxContainer, LeagueBoxWrapper } from "./LeagueBoxElements";
 import Loading from "../common/Loading";
 import LeagueWidgets from "./LeagueWidgets";

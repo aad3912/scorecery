@@ -1,4 +1,4 @@
-import TableWidget from "../common/widgets/TableWidget";
+import StandingsWidget from "../widgets/standings/Standings";
 import { LeagueInfo } from "./WidgetElements";
 
 interface PropsT {
@@ -8,7 +8,7 @@ interface PropsT {
 const LeagueWidgets = ({ selectedId }: PropsT) => {
   return (
     <LeagueInfo>
-      <TableWidget selectedId={selectedId} />
+      <StandingsWidget selectedId={selectedId} />
       <h1>s</h1>
     </LeagueInfo>
   );

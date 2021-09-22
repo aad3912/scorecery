@@ -15,10 +15,22 @@ type APIParamsT = StandingsParamsT | LeagueParamsT;
 
 type LocationT = `/${string}`;
 
+interface ResponseT {
+  response: SpecificResponseT[];
+}
+
+type SpecificResponseT = StandingsResponseT | LeagueDataT;
+
 interface LeagueDataT {
   name: string;
   id: number;
   country: { name: string; code: string };
+}
+
+interface StandingsResponseT {
+  league: {
+    standings: StandingsDataT[][];
+  };
 }
 
 interface StandingsDataT {

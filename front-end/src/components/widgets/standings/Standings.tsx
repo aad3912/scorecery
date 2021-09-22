@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
-import Loading from "../Loading";
-import { getFromApi } from "../constants";
-import { StandingsContainer, TeamInformation } from "./TableWidgetElements";
+import Loading from "../../common/Loading";
+// import { getFromApi } from "../common/constants";
+import {
+  StandingsContainer,
+  StandingsTable,
+  StandingsTBody,
+  StandingsTD,
+  StandingsTH,
+  StandingsTHead,
+  StandingsTR,
+  StandingsH1,
+  TeamLogo,
+} from "./StandingsElements";
 
 interface PropsT {
   selectedId: number;
@@ -29,7 +39,7 @@ const dummy: StandingsDataT[] = [
   {
     form: "WWWDW",
     team: {
-      name: "Manchester United SSSSSSSS",
+      name: "Manchester United",
       id: 33,
       logo: "https://media.api-sports.io/football/teams/33.png",
     },
@@ -136,60 +146,62 @@ const dummy: StandingsDataT[] = [
   },
 ];
 
-const TableWidget = ({ selectedId }: PropsT) => {
+const StandingsWidget = ({ selectedId }: PropsT) => {
   const [standings, setStandings] = useState<StandingsDataT[]>([]);
   const [retrieved, setRetrieved] = useState(false);
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async function getStandings() {
-      const params: StandingsParamsT = {
-        league: `${selectedId}`,
-        season: "2021",
-      };
+      // const params: StandingsParamsT = {
+      //   league: `${selectedId}`,
+      //   season: "2021",
+      // };
 
-      const result = await getFromApi("/standings", params);
-      console.log(result);
-      setStandings(result);
-      return result;
+      // const result = (await getFromApi(
+      //   "/standings",
+      //   params
+      // )) as StandingsResponseT;
+      // setStandings(result.league.standings[0]);
+      // setTimeout(getStandings, 10000);
+      setStandings(dummy);
     }
-    // getStandings();
-    setStandings(dummy);
+    getStandings();
   }, [selectedId]);
 
   useEffect(() => {
     setRetrieved(true);
   }, [standings]);
 
-  return (
+  return retrieved ? (
     <StandingsContainer>
-      {retrieved ? (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            rowGap: "10px",
-            columnGap: "10px",
-          }}
-        >
-          {standings.map((row) => (
-            <TeamInformation key={row.team.id}>
-              <img
-                width="40px"
-                height="40px"
-                src={row.team.logo}
-                alt={row.team.name}
-              />
-              <div>{row.team.name}</div>
-              <div>{row.points}</div>
-              <div>{row.form}</div>
-            </TeamInformation>
+      <StandingsH1>Standings</StandingsH1>
+      <StandingsTable>
+        <StandingsTHead>
+          <StandingsTR>
+            <StandingsTH>Rank</StandingsTH>
+            <StandingsTH>Logo</StandingsTH>
+            <StandingsTH>Team Name</StandingsTH>
+            <StandingsTH>Points</StandingsTH>
+            <StandingsTH>Form</StandingsTH>
+          </StandingsTR>
+        </StandingsTHead>
+        <StandingsTBody>
+          {standings.map((row, index) => (
+            <StandingsTR key={row.team.id}>
+              <StandingsTD>#{index + 1}</StandingsTD>
+              <StandingsTD>
+                <TeamLogo src={row.team.logo} alt={row.team.name} />
+              </StandingsTD>
+              <StandingsTD>{row.team.name}</StandingsTD>
+              <StandingsTD>{row.points}</StandingsTD>
+              <StandingsTD>{row.form}</StandingsTD>
+            </StandingsTR>
           ))}
-        </div>
-      ) : (
-        <Loading>Retrieving standings...</Loading>
-      )}
+        </StandingsTBody>
+      </StandingsTable>
     </StandingsContainer>
+  ) : (
+    <Loading smallFont>Retrieving standings...</Loading>
   );
 };
 
-export default TableWidget;
+export default StandingsWidget;

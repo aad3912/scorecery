@@ -7,14 +7,12 @@ export const LeagueBoxContainer = styled.main`
   flex-direction: column;
   font-size: 1rem;
   //remove this later
-  min-height: 500px;
 `;
 
 export const LeagueBoxWrapper = styled.div`
   width: 80%;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
   padding: 20px 0;
 

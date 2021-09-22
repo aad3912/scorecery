@@ -1,4 +1,4 @@
-import Button from "../common/Button";
+import Button from "../../common/Button";
 import ButtonsContainer from "./SliderElements";
 
 interface PropsT {
@@ -9,9 +9,9 @@ interface PropsT {
 const HorizontalSlider = ({ data, selectedId, setSelectedId }: PropsT) => {
   return (
     <ButtonsContainer>
-      {data.map((league, idx) => (
+      {data.map((league) => (
         <Button
-          key={idx}
+          key={league.id}
           height="50px"
           bgColor="#37003c"
           color="#00f783"
