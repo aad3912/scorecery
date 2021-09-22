@@ -2,7 +2,7 @@ import Button from "../common/Button";
 import ButtonsContainer from "./SliderElements";
 
 interface PropsT {
-  data: LeagueT[];
+  data: LeagueDataT[];
   setSelectedId: (newId: number) => void;
   selectedId: number;
 }

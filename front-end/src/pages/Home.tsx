@@ -1,29 +1,7 @@
 import Navbar from "../components/common/navbar/Navbar";
 import Footer from "../components/common/footer/Footer";
 import LeagueBox from "../components/leagues/LeagueBox";
-import axios from "axios";
-
-type LocationT = `/${string}`;
-type LeagueParamsT = {
-  current: "true" | "false";
-  code: string;
-};
-
-const getFromApi = async (location: LocationT, parameters: GetParamsT) => {
-  try {
-    const url = `https://v3.football.api-sports.io${location}`;
-    const data = await axios.get(url, {
-      headers: {
-        "x-rapidapi-host": "v3.football.api-sports.io",
-        "x-rapidapi-key": "622f1c14d13856fcee43a87199dcc759",
-      },
-      params: parameters,
-    });
-    console.log(data);
-  } catch (error) {
-    alert(error);
-  }
-};
+import { getFromApi } from "../components/common/constants";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getLeagues = () => {

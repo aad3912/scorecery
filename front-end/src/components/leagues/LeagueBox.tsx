@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import HorizontalSlider from "../horizontal-slider/HorizontalSlider";
 import { LeagueBoxContainer, LeagueBoxWrapper } from "./LeagueBoxElements";
 import Loading from "../common/Loading";
+import LeagueWidgets from "./LeagueWidgets";
 
 const INITIAL_ID = -1;
 const NOT_RETRIEVED = false;
-const dummy: LeagueT[] = [
+const dummy: LeagueDataT[] = [
   { name: "Premier League", id: 39, country: { name: "England", code: "GB" } },
   { name: "Ligue 1", id: 61, country: { name: "France", code: "FR" } },
   { name: "Bundesliga 1", id: 78, country: { name: "Germany", code: "DE" } },
@@ -14,7 +15,7 @@ const dummy: LeagueT[] = [
 
 const LeagueBox = () => {
   const [selectedId, setSelectedId] = useState(INITIAL_ID);
-  const [data, setData] = useState<LeagueT[]>([]);
+  const [data, setData] = useState<LeagueDataT[]>([]);
   const [retrieved, setRetrieved] = useState(NOT_RETRIEVED);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const LeagueBox = () => {
                 data={data}
                 setSelectedId={setSelectedId}
               />
+              <LeagueWidgets selectedId={selectedId} />
             </>
           )
         ) : (
