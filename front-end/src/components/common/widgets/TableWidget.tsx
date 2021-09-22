@@ -140,6 +140,7 @@ const TableWidget = ({ selectedId }: PropsT) => {
   const [standings, setStandings] = useState<StandingsDataT[]>([]);
   const [retrieved, setRetrieved] = useState(false);
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async function getStandings() {
       const params: StandingsParamsT = {
         league: `${selectedId}`,
