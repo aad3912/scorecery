@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import HorizontalSlider from "../widgets/horizontal-slider/HorizontalSlider";
 import { LeagueBoxContainer, LeagueBoxWrapper } from "./LeagueBoxElements";
 import Loading from "../common/Loading";
-import LeagueWidgets from "./LeagueWidgets";
+import LeagueWidgets from "./LeagueData";
 
 const INITIAL_ID = -1;
 const NOT_RETRIEVED = false;

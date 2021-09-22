@@ -1,5 +1,5 @@
 import StandingsWidget from "../widgets/standings/Standings";
-import { LeagueInfo } from "./WidgetElements";
+import { LeagueInfo } from "./DataElements";
 
 interface PropsT {
   selectedId: number;
