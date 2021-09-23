@@ -11,7 +11,12 @@ type LeagueParamsT = {
   code: string;
 };
 
-type APIParamsT = StandingsParamsT | LeagueParamsT;
+type MatchParamsT = {
+  league: `${number}`;
+  season: `${number}`;
+};
+
+type APIParamsT = StandingsParamsT | LeagueParamsT | MatchParamsT;
 
 type LocationT = `/${string}`;
 
@@ -19,7 +24,7 @@ interface ResponseT {
   response: SpecificResponseT[];
 }
 
-type SpecificResponseT = StandingsResponseT | LeagueDataT;
+type SpecificResponseT = StandingsResponseT | LeagueDataT | MatchesResponseT;
 
 interface LeagueDataT {
   name: string;
@@ -33,20 +38,35 @@ interface StandingsResponseT {
   };
 }
 
+interface TeamsResponseT {
+  name: string;
+  logo: string;
+  id: number;
+}
+
 interface StandingsDataT {
   form: string;
   points: number;
-  team: {
-    name: string;
-    logo: string;
-    id: number;
-  };
+  team: TeamsResponseT;
 }
 
-interface StandingsResponseT {
-  response: {
-    league: {
-      standings: StandingsDataT[][];
+interface MatchesResponseT {
+  fixture: {
+    date: string;
+    id: number;
+    status: {
+      short: string;
     };
-  }[];
+    venue: {
+      name: string;
+    };
+  };
+  goals: {
+    away: number;
+    home: number;
+  };
+  teams: {
+    away: TeamsResponseT;
+    home: TeamsResponseT;
+  };
 }

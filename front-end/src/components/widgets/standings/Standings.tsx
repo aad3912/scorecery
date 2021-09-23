@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+// import { getFromApi } from "../../common/constants";
 import Loading from "../../common/Loading";
-// import { getFromApi } from "../common/constants";
 import {
   StandingsContainer,
   StandingsTable,
@@ -11,6 +11,7 @@ import {
   StandingsTR,
   StandingsH1,
   TeamLogo,
+  FormLetter,
 } from "./StandingsElements";
 
 interface PropsT {
@@ -159,8 +160,8 @@ const StandingsWidget = ({ selectedId }: PropsT) => {
       // const result = (await getFromApi(
       //   "/standings",
       //   params
-      // )) as StandingsResponseT;
-      // setStandings(result.league.standings[0]);
+      // )) as StandingsResponseT[];
+      // setStandings(result[0].league.standings[0]);
       // setTimeout(getStandings, 10000);
       setStandings(dummy);
     }
@@ -193,7 +194,15 @@ const StandingsWidget = ({ selectedId }: PropsT) => {
               </StandingsTD>
               <StandingsTD>{row.team.name}</StandingsTD>
               <StandingsTD>{row.points}</StandingsTD>
-              <StandingsTD>{row.form}</StandingsTD>
+              <StandingsTD>
+                {Array.prototype.map.call(row.form, (letter, idx) => {
+                  return (
+                    <FormLetter key={idx} letter={letter}>
+                      {letter}
+                    </FormLetter>
+                  );
+                })}
+              </StandingsTD>
             </StandingsTR>
           ))}
         </StandingsTBody>

@@ -4,7 +4,7 @@ export const getFromApi = async (
   location: LocationT,
   parameters: APIParamsT
 ) => {
-  let result: SpecificResponseT = {} as SpecificResponseT;
+  let result: SpecificResponseT[] = [];
   try {
     const url = `https://v3.football.api-sports.io${location}`;
     const data = await axios.get<ResponseT>(url, {
@@ -14,7 +14,7 @@ export const getFromApi = async (
       },
       params: parameters,
     });
-    result = data.data.response[0];
+    result = data.data.response;
   } catch (error) {
     alert(error);
   }
