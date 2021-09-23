@@ -6,7 +6,6 @@ export const LeagueBoxContainer = styled.main`
   align-items: center;
   flex-direction: column;
   font-size: 1rem;
-  //remove this later
 `;
 
 export const LeagueBoxWrapper = styled.div`

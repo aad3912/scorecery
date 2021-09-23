@@ -2,22 +2,21 @@ import styled from "styled-components";
 
 export const StandingsContainer = styled.div`
   width: 100%;
-  overflow: scroll;
+  justify-content: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
   scrollbar-color: #00f783 transparent;
-  border: 2px solid;
   display: flex;
   flex-direction: column;
   gap: 10px;
   font-size: 1rem;
   padding: 10px;
-  border-radius: 10px;
-
-  @media screen and (max-width: 800px) {
-    border: none;
-  }
+  border: none;
 `;
 
-export const StandingsH1 = styled.h1``;
+export const StandingsH1 = styled.h1`
+  text-align: center;
+`;
 
 export const StandingsTable = styled.table`
   border-collapse: collapse;

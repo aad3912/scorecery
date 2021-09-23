@@ -5,30 +5,22 @@ export const LeagueInfo = styled.div`
   width: 100%;
   border-radius: 10px;
   padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  justify-items: center;
-  /* Uncomment following for center vertical align for each grid cell */
-  /* align-items: center; */
-
-  @media screen and (max-width: 800px) {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
 `;
 
 export const SmallerWidgets = styled.div`
+  max-height: 500px;
   width: 100%;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  justify-items: center;
-  /* Comment following to remove center vertical align for each grid cell */
-  align-items: center;
-  border-collapse: collapse;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
 
   @media screen and (max-width: 800px) {
-    grid-template-columns: 1fr;
-    grid-row-gap: 10px;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0px;
   }
 `;

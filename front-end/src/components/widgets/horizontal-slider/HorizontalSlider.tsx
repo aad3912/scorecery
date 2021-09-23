@@ -1,5 +1,5 @@
 import Button from "../../common/Button";
-import ButtonsContainer from "./SliderElements";
+import { InnerSlider, SliderContainer } from "./SliderElements";
 
 interface PropsT {
   data: LeagueDataT[];
@@ -8,23 +8,25 @@ interface PropsT {
 }
 const HorizontalSlider = ({ data, selectedId, setSelectedId }: PropsT) => {
   return (
-    <ButtonsContainer>
-      {data.map((league) => (
-        <Button
-          key={league.id}
-          height="50px"
-          bgColor="#37003c"
-          color="#00f783"
-          borderRadius="10px"
-          display="flex"
-          onClick={() => setSelectedId(league.id)}
-          border={league.id === selectedId}
-          largeFont
-        >
-          {league.name}
-        </Button>
-      ))}
-    </ButtonsContainer>
+    <SliderContainer>
+      <InnerSlider>
+        {data.map((league) => (
+          <Button
+            key={league.id}
+            height="50px"
+            bgColor="#37003c"
+            color="#00f783"
+            borderRadius="10px"
+            display="flex"
+            onClick={() => setSelectedId(league.id)}
+            border={league.id === selectedId}
+            largeFont
+          >
+            {league.name}
+          </Button>
+        ))}
+      </InnerSlider>
+    </SliderContainer>
   );
 };
 

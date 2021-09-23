@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-// import { getFromApi } from "../../common/constants";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { getFromApi } from "../../common/constants";
 import Loading from "../../common/Loading";
 import {
   StandingsContainer,
@@ -156,7 +157,6 @@ const StandingsWidget = ({ selectedId }: PropsT) => {
       //   league: `${selectedId}`,
       //   season: "2021",
       // };
-
       // const result = (await getFromApi(
       //   "/standings",
       //   params
@@ -169,47 +169,51 @@ const StandingsWidget = ({ selectedId }: PropsT) => {
   }, [selectedId]);
 
   useEffect(() => {
-    setRetrieved(true);
+    if (standings.length) setRetrieved(true);
   }, [standings]);
 
-  return retrieved ? (
+  return (
     <StandingsContainer>
-      <StandingsH1>Standings</StandingsH1>
-      <StandingsTable>
-        <StandingsTHead>
-          <StandingsTR>
-            <StandingsTH>Rank</StandingsTH>
-            <StandingsTH>Logo</StandingsTH>
-            <StandingsTH>Team Name</StandingsTH>
-            <StandingsTH>Points</StandingsTH>
-            <StandingsTH>Form</StandingsTH>
-          </StandingsTR>
-        </StandingsTHead>
-        <StandingsTBody>
-          {standings.map((row, index) => (
-            <StandingsTR key={row.team.id}>
-              <StandingsTD>#{index + 1}</StandingsTD>
-              <StandingsTD>
-                <TeamLogo src={row.team.logo} alt={row.team.name} />
-              </StandingsTD>
-              <StandingsTD>{row.team.name}</StandingsTD>
-              <StandingsTD>{row.points}</StandingsTD>
-              <StandingsTD>
-                {Array.prototype.map.call(row.form, (letter, idx) => {
-                  return (
-                    <FormLetter key={idx} letter={letter}>
-                      {letter}
-                    </FormLetter>
-                  );
-                })}
-              </StandingsTD>
-            </StandingsTR>
-          ))}
-        </StandingsTBody>
-      </StandingsTable>
+      {retrieved ? (
+        <>
+          <StandingsH1>Standings</StandingsH1>
+          <StandingsTable>
+            <StandingsTHead>
+              <StandingsTR>
+                <StandingsTH>Rank</StandingsTH>
+                <StandingsTH>Logo</StandingsTH>
+                <StandingsTH>Team Name</StandingsTH>
+                <StandingsTH>Points</StandingsTH>
+                <StandingsTH>Form</StandingsTH>
+              </StandingsTR>
+            </StandingsTHead>
+            <StandingsTBody>
+              {standings.map((row, index) => (
+                <StandingsTR key={row.team.id}>
+                  <StandingsTD>#{index + 1}</StandingsTD>
+                  <StandingsTD>
+                    <TeamLogo src={row.team.logo} alt={row.team.name} />
+                  </StandingsTD>
+                  <StandingsTD>{row.team.name}</StandingsTD>
+                  <StandingsTD>{row.points}</StandingsTD>
+                  <StandingsTD>
+                    {Array.prototype.map.call(row.form, (letter, idx) => {
+                      return (
+                        <FormLetter key={idx} letter={letter}>
+                          {letter}
+                        </FormLetter>
+                      );
+                    })}
+                  </StandingsTD>
+                </StandingsTR>
+              ))}
+            </StandingsTBody>
+          </StandingsTable>
+        </>
+      ) : (
+        <Loading smallFont>Retrieving standings...</Loading>
+      )}
     </StandingsContainer>
-  ) : (
-    <Loading smallFont>Retrieving standings...</Loading>
   );
 };
 

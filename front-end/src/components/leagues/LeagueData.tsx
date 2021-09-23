@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect, useRef, useState } from "react";
 import { getFromApi } from "../common/constants";
 import Fixtures from "../widgets/fixtures/Fixtures";
 import Results from "../widgets/results/Results";
 import StandingsWidget from "../widgets/standings/Standings";
 import { LeagueInfo, SmallerWidgets } from "./DataElements";
-
 interface PropsT {
   selectedId: number;
 }
@@ -26,46 +26,47 @@ const getFixtures = (matches: MatchesResponseT[]) => {
   return { fixtures, started, results };
 };
 
+const dummy: MatchesResponseT[] = [
+  {
+    fixture: {
+      id: 0,
+      status: { short: "FT" },
+      date: "Today",
+      venue: { name: "Somewhere" },
+    },
+    goals: {
+      home: 0,
+      away: 2,
+    },
+    teams: {
+      home: { name: "Arsenal", logo: "", id: 42 },
+      away: { name: "Brentford", logo: "", id: 69 },
+    },
+  },
+];
+
 const LeagueWidgets = ({ selectedId }: PropsT) => {
   const [fixtures, setFixtures] = useState<MatchesResponseT[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [started, setStarted] = useState<MatchesResponseT[]>([]);
-  const [results, setResults] = useState<MatchesResponseT[]>([
-    {
-      fixture: {
-        id: 0,
-        status: { short: "FT" },
-        date: "Today",
-        venue: { name: "Somewhere" },
-      },
-      goals: {
-        home: 0,
-        away: 2,
-      },
-      teams: {
-        home: { name: "Arsenal", logo: "", id: 42 },
-        away: { name: "Brentford", logo: "", id: 69 },
-      },
-    },
-  ]);
+  const [results, setResults] = useState<MatchesResponseT[]>([]);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async function getMatches() {
-      const params: MatchParamsT = {
-        league: `${selectedId}`,
-        season: "2021",
-      };
-      const result = (await getFromApi(
-        "/fixtures",
-        params
-      )) as MatchesResponseT[];
-      let { fixtures, started, results } = getFixtures(result);
-      setFixtures(fixtures);
-      setStarted(started);
-      setResults(results);
+      // const params: MatchParamsT = {
+      //   league: `${selectedId}`,
+      //   season: "2021",
+      // };
+      // const result = (await getFromApi(
+      //   "/fixtures",
+      //   params
+      // )) as MatchesResponseT[];
+      // let { fixtures, started, results } = getFixtures(result);
+      // setFixtures(fixtures);
+      // setStarted(started);
+      // setResults(results);
+      setResults(dummy);
     }
-    // getMatches();
+    getMatches();
   }, [selectedId]);
 
   return (
@@ -73,7 +74,7 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
       <StandingsWidget selectedId={selectedId} />
       <SmallerWidgets>
         <Results results={results} />
-        <Fixtures fixtures={fixtures} />
+        <Results results={results} />
       </SmallerWidgets>
     </LeagueInfo>
   );

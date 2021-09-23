@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
+interface PropsT {
+  justifyCenter: boolean;
+}
+
 export const ResultsContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  border: 2px solid;
-  border-bottom: 1px solid;
+  width: 47%;
   overflow: scroll;
   scrollbar-color: #00f783 transparent;
   display: flex;
@@ -13,9 +14,13 @@ export const ResultsContainer = styled.div`
   font-size: 1rem;
   padding: 10px;
   border-radius: 10px;
+  justify-content: ${(props: PropsT) =>
+    props.justifyCenter ? "center" : "inherit"};
 
   @media screen and (max-width: 800px) {
     border: none;
+    width: 100%;
+    height: 47%;
   }
 `;
 
