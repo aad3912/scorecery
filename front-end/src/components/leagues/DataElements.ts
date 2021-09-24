@@ -21,6 +21,7 @@ export const LargerWidgets = styled.div`
   padding: 10px;
   border: 2px solid;
   border-radius: 10px;
+  min-height: 200px;
 
   @media screen and (max-width: 800px) {
     width: 100%;
@@ -39,6 +40,7 @@ export const SmallerWidgets = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-height: 200px;
 
   @media screen and (max-width: 800px) {
     width: 100%;

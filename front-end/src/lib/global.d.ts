@@ -53,6 +53,7 @@ interface StandingsDataT {
 interface MatchesResponseT {
   fixture: {
     date: string;
+    dateObj?: Date;
     id: number;
     status: {
       short: string;

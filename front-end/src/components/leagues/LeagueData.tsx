@@ -4,6 +4,9 @@ import { getFromApi } from "../common/constants";
 import GenericDisplay from "../widgets/generic-small-widget/GenericDisplay";
 import StandingsWidget from "../widgets/standings/Standings";
 import { LargerWidgets, LeagueInfo, SmallerWidgets } from "./DataElements";
+import dummyStandings from "../dummy/DummyStandings";
+import dummyMatches from "../dummy/DummyMatches";
+
 interface PropsT {
   selectedId: number;
 }
@@ -14,762 +17,31 @@ const getFixtures = (matches: MatchesResponseT[]) => {
   const started = [];
   for (let match of matches) {
     const status = match.fixture.status.short;
+    const newMatch: MatchesResponseT = {
+      ...match,
+      fixture: { ...match.fixture, dateObj: new Date(match.fixture.date) },
+    };
     if (status === "FT") {
-      results.push(match);
+      results.push(newMatch);
     } else if (status === "NS") {
-      fixtures.push(match);
+      fixtures.push(newMatch);
     } else {
-      started.push(match);
+      started.push(newMatch);
     }
   }
+
+  fixtures.sort(
+    (a, b) => a.fixture.dateObj!.getTime() - b.fixture.dateObj!.getTime()
+  );
+  started.sort(
+    (a, b) => a.fixture.dateObj!.getTime() - b.fixture.dateObj!.getTime()
+  );
+  results.sort(
+    (a, b) => b.fixture.dateObj!.getTime() - a.fixture.dateObj!.getTime()
+  );
+
   return { fixtures, started, results };
 };
-
-const dummy: MatchesResponseT[] = [
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-  {
-    fixture: {
-      id: 0,
-      status: { short: "FT" },
-      date: "Today",
-      venue: { name: "Somewwwwwwwwwwwwwwwwwwhere" },
-    },
-    goals: {
-      home: 0,
-      away: 2,
-    },
-    teams: {
-      home: { name: "Arsenal", logo: "", id: 42 },
-      away: { name: "Brentford", logo: "", id: 69 },
-    },
-  },
-];
-
-const dummyStandings: StandingsDataT[] = [
-  {
-    form: "WWDWW",
-    team: {
-      name: "Chelsea",
-      id: 49,
-      logo: "https://media.api-sports.io/football/teams/49.png",
-    },
-    points: 13,
-  },
-  {
-    form: "WWDWW",
-    team: {
-      name: "Liverpool",
-      id: 40,
-      logo: "https://media.api-sports.io/football/teams/40.png",
-    },
-    points: 13,
-  },
-  {
-    form: "WWWDW",
-    team: {
-      name: "Manchester United",
-      id: 33,
-      logo: "https://media.api-sports.io/football/teams/33.png",
-    },
-    points: 13,
-  },
-  {
-    form: "WWLWW",
-    team: {
-      name: "Brighton",
-      id: 51,
-      logo: "https://media.api-sports.io/football/teams/51.png",
-    },
-    points: 12,
-  },
-  {
-    form: "DWWWL",
-    team: {
-      name: "Manchester City",
-      id: 50,
-      logo: "https://media.api-sports.io/football/teams/49.png",
-    },
-    points: 10,
-  },
-  {
-    form: "LWWDW",
-    team: {
-      name: "Everton",
-      id: 45,
-      logo: "https://media.api-sports.io/football/teams/45.png",
-    },
-    points: 10,
-  },
-  {
-    form: "LLWWW",
-    team: {
-      name: "Tottenham",
-      id: 47,
-      logo: "https://media.api-sports.io/football/teams/47.png",
-    },
-    points: 9,
-  },
-  {
-    form: "LDDWW",
-    team: {
-      name: "West Ham",
-      id: 48,
-      logo: "https://media.api-sports.io/football/teams/48.png",
-    },
-    points: 8,
-  },
-  {
-    form: "WLDDW",
-    team: {
-      name: "Brentford",
-      id: 550,
-      logo: "https://media.api-sports.io/football/teams/55.png",
-    },
-    points: 8,
-  },
-  {
-    form: "WLDWL",
-    team: {
-      name: "Aston Villa",
-      id: 66,
-      logo: "https://media.api-sports.io/football/teams/66.png",
-    },
-    points: 7,
-  },
-  {
-    form: "WLLLW",
-    team: {
-      name: "Watford",
-      id: 38,
-      logo: "https://media.api-sports.io/football/teams/38.png",
-    },
-    points: 6,
-  },
-  {
-    form: "LLWLW",
-    team: {
-      name: "Leicester",
-      id: 46,
-      logo: "https://media.api-sports.io/football/teams/46.png",
-    },
-    points: 6,
-  },
-  {
-    form: "WWLLL",
-    team: {
-      name: "Arsenal",
-      id: 42,
-      logo: "https://media.api-sports.io/football/teams/42.png",
-    },
-    points: 6,
-  },
-  {
-    form: "LWDDL",
-    team: {
-      name: "Crystal Palace",
-      id: 52,
-      logo: "https://media.api-sports.io/football/teams/52.png",
-    },
-    points: 5,
-  },
-  {
-    form: "LWDDL",
-    team: {
-      name: "Crystal Palace",
-      id: 53,
-      logo: "https://media.api-sports.io/football/teams/52.png",
-    },
-    points: 5,
-  },
-  {
-    form: "LWDDL",
-    team: {
-      name: "Crystal Palace",
-      id: 54,
-      logo: "https://media.api-sports.io/football/teams/52.png",
-    },
-    points: 5,
-  },
-  {
-    form: "LWDDL",
-    team: {
-      name: "Crystal Palace",
-      id: 55,
-      logo: "https://media.api-sports.io/football/teams/52.png",
-    },
-    points: 5,
-  },
-  {
-    form: "LWDDL",
-    team: {
-      name: "Crystal Palace",
-      id: 56,
-      logo: "https://media.api-sports.io/football/teams/52.png",
-    },
-    points: 5,
-  },
-  {
-    form: "LWDDL",
-    team: {
-      name: "Crystal Palace",
-      id: 57,
-      logo: "https://media.api-sports.io/football/teams/52.png",
-    },
-    points: 5,
-  },
-  {
-    form: "LWDDL",
-    team: {
-      name: "Crystal Palace",
-      id: 58,
-      logo: "https://media.api-sports.io/football/teams/52.png",
-    },
-    points: 5,
-  },
-];
 
 const LeagueWidgets = ({ selectedId }: PropsT) => {
   const [fixtures, setFixtures] = useState<MatchesResponseT[]>([]);
@@ -780,46 +52,48 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
 
   useEffect(() => {
     async function getStandings() {
-      const params: StandingsParamsT = {
-        league: `${selectedId}`,
-        season: "2021",
-      };
-      const result = (await getFromApi(
-        "/standings",
-        params
-      )) as StandingsResponseT[];
-      setStandings(result[0].league.standings[0]);
+      // const params: StandingsParamsT = {
+      //   league: `${selectedId}`,
+      //   season: "2021",
+      // };
+      // const result = (await getFromApi(
+      //   "/standings",
+      //   params
+      // )) as StandingsResponseT[];
+      // setStandings(
+      //   result.length
+      //     ? result[0].league.standings.length
+      //       ? result[0].league.standings[0]
+      //       : []
+      //     : []
+      // );
       // setTimeout(getStandings, 10000);
-      // setStandings(dummyStandings);
+      setStandings(dummyStandings);
     }
     getStandings();
   }, [selectedId]);
 
   useEffect(() => {
-    async function getMatches() {
-      const params: MatchParamsT = {
-        league: `${selectedId}`,
-        season: "2021",
-      };
-      const result = (await getFromApi(
-        "/fixtures",
-        params
-      )) as MatchesResponseT[];
-      let { fixtures, started, results } = getFixtures(result);
-      setFixtures(fixtures);
-      setStarted(started);
-      setResults(results);
-      // setFixtures(dummy);
-      // setResults(dummy);
-    }
-    getMatches();
-  }, [selectedId]);
-
-  useEffect(() => {
     if (standings.length) {
-      setRetrieved(true);
+      async function getMatches() {
+        const params: MatchParamsT = {
+          league: `${selectedId}`,
+          season: "2021",
+        };
+        // const result = (await getFromApi(
+        //   "/fixtures",
+        //   params
+        // )) as MatchesResponseT[];
+        const result = dummyMatches;
+        let { fixtures, started, results } = getFixtures(result);
+        setFixtures(fixtures);
+        setStarted(started);
+        setResults(results);
+        setRetrieved(true);
+      }
+      getMatches();
     }
-  }, [standings]);
+  }, [selectedId, standings]);
 
   return (
     <LeagueInfo>
@@ -827,8 +101,8 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
         <StandingsWidget standings={standings} retrieved={retrieved} />
       </LargerWidgets>
       <SmallerWidgets numberOfTeams={standings.length}>
-        <GenericDisplay results={false} data={fixtures} />
-        <GenericDisplay results={true} data={results} />
+        <GenericDisplay retrieved={retrieved} results={false} data={fixtures} />
+        <GenericDisplay retrieved={retrieved} results={true} data={results} />
       </SmallerWidgets>
     </LeagueInfo>
   );
