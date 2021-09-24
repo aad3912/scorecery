@@ -8,61 +8,83 @@ import {
   ResultsTH,
   ResultsTHead,
   ResultsTR,
+  ResultsWrapper,
 } from "./ResultsElements";
 
 interface PropsT {
-  results: MatchesResponseT[];
+  data: MatchesResponseT[];
+  results: boolean;
 }
 
-const Results = ({ results }: PropsT) => {
+const Results = ({ data, results }: PropsT) => {
+  const heading = results ? "Results" : "Fixtures";
+
   return (
-    <ResultsContainer justifyCenter={results.length === 0}>
-      {results.length ? (
-        <>
-          <ResultsH1>Results</ResultsH1>
-          <ResultsTable>
-            <ResultsTHead>
-              <ResultsTR>
-                <ResultsTH>Date</ResultsTH>
-                <ResultsTH>
-                  Home
-                  <br />
-                  (Goals)
-                </ResultsTH>
-                <ResultsTH>
-                  Away
-                  <br />
-                  (Goals)
-                </ResultsTH>
-              </ResultsTR>
-            </ResultsTHead>
-            <ResultsTBody>
-              {results.map((result, index) => {
-                return (
-                  /* TODO: CHANGE KEY BACK TO result.fixture.id */
-                  <ResultsTR key={index}>
-                    <ResultsTD>
-                      {result.fixture.date.substring(0, 10)}
-                      <br />
-                      {result.fixture.venue.name}
-                    </ResultsTD>
-                    <ResultsTD>
-                      {result.teams.home.name}
-                      <br />({result.goals.home})
-                    </ResultsTD>
-                    <ResultsTD>
-                      {result.teams.away.name}
-                      <br />({result.goals.away})
-                    </ResultsTD>
-                  </ResultsTR>
-                );
-              })}
-            </ResultsTBody>
-          </ResultsTable>
-        </>
-      ) : (
-        <Loading smallFont>No results to show!</Loading>
-      )}
+    <ResultsContainer>
+      <ResultsWrapper justifyCenter={data.length === 0}>
+        {data.length ? (
+          <>
+            <ResultsH1>{heading}</ResultsH1>
+            <ResultsTable>
+              <ResultsTHead>
+                <ResultsTR>
+                  <ResultsTH>Date</ResultsTH>
+                  <ResultsTH>
+                    Home
+                    {results && (
+                      <>
+                        <br />
+                        (Goals)
+                      </>
+                    )}
+                  </ResultsTH>
+                  <ResultsTH>
+                    Away
+                    {results && (
+                      <>
+                        <br />
+                        (Goals)
+                      </>
+                    )}
+                  </ResultsTH>
+                </ResultsTR>
+              </ResultsTHead>
+              <ResultsTBody>
+                {data.map((match, index) => {
+                  return (
+                    /* TODO: CHANGE KEY BACK TO result.fixture.id */
+                    <ResultsTR key={index}>
+                      <ResultsTD>
+                        {match.fixture.date.substring(0, 10)}
+                        <br />
+                        {match.fixture.venue.name}
+                      </ResultsTD>
+                      <ResultsTD>
+                        {match.teams.home.name}
+                        {results && (
+                          <>
+                            <br />({match.goals.home})
+                          </>
+                        )}
+                      </ResultsTD>
+                      <ResultsTD>
+                        {match.teams.away.name}
+                        {results && (
+                          <>
+                            <br />({match.goals.away})
+                          </>
+                        )}
+                      </ResultsTD>
+                    </ResultsTR>
+                  );
+                })}
+              </ResultsTBody>
+            </ResultsTable>
+          </>
+        ) : (
+          <Loading smallFont>No {heading} to show!</Loading>
+        )}
+      </ResultsWrapper>
     </ResultsContainer>
   );
 };

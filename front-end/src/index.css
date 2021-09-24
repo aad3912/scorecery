@@ -8,6 +8,8 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
@@ -16,8 +18,6 @@ body {
 }
 
 body {
-  margin: 0;
-  padding: 0;
   width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Rowdies", "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
@@ -35,10 +35,8 @@ h1,
 h2,
 h3,
 h4 {
-  padding: 0;
-  margin: 0;
   font-weight: normal;
-  line-height: normal;
+  line-height: 41px;
 }
 
 h1 {

@@ -7,20 +7,41 @@ export const LeagueInfo = styled.div`
   padding: 20px;
   display: flex;
   gap: 10px;
-  flex-direction: column;
-`;
-
-export const SmallerWidgets = styled.div`
-  max-height: 500px;
-  width: 100%;
-  display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 10px;
 
   @media screen and (max-width: 800px) {
     flex-direction: column;
-    gap: 10px;
-    padding: 0px;
+  }
+`;
+
+export const LargerWidgets = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 2px solid;
+  border-radius: 10px;
+
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
+`;
+
+interface PropsT {
+  numberOfTeams: number;
+}
+
+export const SmallerWidgets = styled.div`
+  height: ${({ numberOfTeams }: PropsT) =>
+    `${1 + 51 * (numberOfTeams + 1) + (75 + numberOfTeams * 4)}px`};
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    height: 1320px;
+    /* gap: 10px; */
   }
 `;

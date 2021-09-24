@@ -5,23 +5,25 @@ interface PropsT {
 }
 
 export const ResultsContainer = styled.div`
-  width: 47%;
+  height: 50%;
+  width: 100%;
   overflow: scroll;
   scrollbar-color: #00f783 transparent;
+  font-size: 1rem;
+  border: 2px solid;
+  padding: 10px;
+  border-radius: 10px;
+`;
+
+export const ResultsWrapper = styled.div`
+  width: 100%;
+  padding: 0;
+  border: none;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-size: 1rem;
-  padding: 10px;
-  border-radius: 10px;
   justify-content: ${(props: PropsT) =>
     props.justifyCenter ? "center" : "inherit"};
-
-  @media screen and (max-width: 800px) {
-    border: none;
-    width: 100%;
-    height: 47%;
-  }
 `;
 
 export const ResultsH1 = styled.h1``;

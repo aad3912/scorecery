@@ -10,13 +10,10 @@ export const StandingsContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   font-size: 1rem;
-  padding: 10px;
   border: none;
 `;
 
-export const StandingsH1 = styled.h1`
-  text-align: center;
-`;
+export const StandingsH1 = styled.h1``;
 
 export const StandingsTable = styled.table`
   border-collapse: collapse;
@@ -35,6 +32,7 @@ export const StandingsTH = styled.th`
   border-right: 1px solid;
   border-bottom: 1px solid;
   font-size: 1.3rem;
+  height: 40px;
 `;
 export const StandingsTD = styled.td`
   padding: 5px;
