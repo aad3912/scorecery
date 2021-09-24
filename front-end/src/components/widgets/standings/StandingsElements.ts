@@ -3,9 +3,7 @@ import styled from "styled-components";
 export const StandingsContainer = styled.div`
   width: 100%;
   justify-content: center;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  scrollbar-color: #00f783 transparent;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -13,12 +11,22 @@ export const StandingsContainer = styled.div`
   border: none;
 `;
 
-export const StandingsH1 = styled.h1``;
+export const StandingsH1 = styled.h1`
+  text-align: center;
+`;
+
+export const StandingsTableWrapper = styled.div`
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-color: #00f783 transparent;
+`;
 
 export const StandingsTable = styled.table`
   border-collapse: collapse;
   font-size: 1rem;
-  border: 1px solid;
+  border: 1px solid white;
+  width: 100%;
 `;
 
 export const StandingsTHead = styled.thead``;
@@ -29,8 +37,8 @@ export const StandingsTH = styled.th`
   padding: 5px;
   white-space: nowrap;
   text-align: center;
-  border-right: 1px solid;
-  border-bottom: 1px solid;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
   font-size: 1.3rem;
   height: 40px;
 `;
@@ -38,8 +46,8 @@ export const StandingsTD = styled.td`
   padding: 5px;
   white-space: nowrap;
   text-align: center;
-  border-right: 1px solid;
-  border-bottom: 1px solid;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
 `;
 
 export const StandingsTR = styled.tr``;

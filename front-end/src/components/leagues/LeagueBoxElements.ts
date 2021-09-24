@@ -9,7 +9,7 @@ export const LeagueBoxContainer = styled.main`
 `;
 
 export const LeagueBoxWrapper = styled.div`
-  width: 80%;
+  width: 85%;
   display: flex;
   justify-content: center;
   flex-direction: column;

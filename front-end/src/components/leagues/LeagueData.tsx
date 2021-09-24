@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { getFromApi } from "../common/constants";
-import Results from "../widgets/results/Results";
+import GenericDisplay from "../widgets/generic-small-widget/GenericDisplay";
 import StandingsWidget from "../widgets/standings/Standings";
 import { LargerWidgets, LeagueInfo, SmallerWidgets } from "./DataElements";
 interface PropsT {
@@ -665,7 +665,7 @@ const dummyStandings: StandingsDataT[] = [
     form: "WLDDW",
     team: {
       name: "Brentford",
-      id: 55,
+      id: 550,
       logo: "https://media.api-sports.io/football/teams/55.png",
     },
     points: 8,
@@ -719,7 +719,7 @@ const dummyStandings: StandingsDataT[] = [
     form: "LWDDL",
     team: {
       name: "Crystal Palace",
-      id: 52,
+      id: 53,
       logo: "https://media.api-sports.io/football/teams/52.png",
     },
     points: 5,
@@ -728,7 +728,7 @@ const dummyStandings: StandingsDataT[] = [
     form: "LWDDL",
     team: {
       name: "Crystal Palace",
-      id: 52,
+      id: 54,
       logo: "https://media.api-sports.io/football/teams/52.png",
     },
     points: 5,
@@ -737,7 +737,7 @@ const dummyStandings: StandingsDataT[] = [
     form: "LWDDL",
     team: {
       name: "Crystal Palace",
-      id: 52,
+      id: 55,
       logo: "https://media.api-sports.io/football/teams/52.png",
     },
     points: 5,
@@ -746,7 +746,7 @@ const dummyStandings: StandingsDataT[] = [
     form: "LWDDL",
     team: {
       name: "Crystal Palace",
-      id: 52,
+      id: 56,
       logo: "https://media.api-sports.io/football/teams/52.png",
     },
     points: 5,
@@ -755,7 +755,7 @@ const dummyStandings: StandingsDataT[] = [
     form: "LWDDL",
     team: {
       name: "Crystal Palace",
-      id: 52,
+      id: 57,
       logo: "https://media.api-sports.io/football/teams/52.png",
     },
     points: 5,
@@ -764,7 +764,7 @@ const dummyStandings: StandingsDataT[] = [
     form: "LWDDL",
     team: {
       name: "Crystal Palace",
-      id: 52,
+      id: 58,
       logo: "https://media.api-sports.io/football/teams/52.png",
     },
     points: 5,
@@ -796,12 +796,6 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
   }, [selectedId]);
 
   useEffect(() => {
-    if (standings.length) {
-      setRetrieved(true);
-    }
-  }, [standings]);
-
-  useEffect(() => {
     async function getMatches() {
       const params: MatchParamsT = {
         league: `${selectedId}`,
@@ -815,10 +809,17 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
       setFixtures(fixtures);
       setStarted(started);
       setResults(results);
+      // setFixtures(dummy);
       // setResults(dummy);
     }
     getMatches();
   }, [selectedId]);
+
+  useEffect(() => {
+    if (standings.length) {
+      setRetrieved(true);
+    }
+  }, [standings]);
 
   return (
     <LeagueInfo>
@@ -826,8 +827,8 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
         <StandingsWidget standings={standings} retrieved={retrieved} />
       </LargerWidgets>
       <SmallerWidgets numberOfTeams={standings.length}>
-        <Results results={false} data={fixtures} />
-        <Results results={true} data={results} />
+        <GenericDisplay results={false} data={fixtures} />
+        <GenericDisplay results={true} data={results} />
       </SmallerWidgets>
     </LeagueInfo>
   );

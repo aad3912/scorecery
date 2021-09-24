@@ -24,6 +24,7 @@ export const LargerWidgets = styled.div`
 
   @media screen and (max-width: 800px) {
     width: 100%;
+    border: none;
   }
 `;
 
@@ -42,6 +43,5 @@ export const SmallerWidgets = styled.div`
   @media screen and (max-width: 800px) {
     width: 100%;
     height: 1320px;
-    /* gap: 10px; */
   }
 `;

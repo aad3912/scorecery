@@ -13,7 +13,7 @@ export const FooterContainer = styled.div`
 `;
 
 export const FooterWrapper = styled.div`
-  width: 80%;
+  width: 85%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,8 +41,7 @@ export const FooterLogoAndName = styled(LinkR)`
   }
 `;
 
-export const FooterCompanyName = styled.h1`
-`;
+export const FooterCompanyName = styled.h1``;
 
 export const FooterLogo = styled.img`
   height: 40px;
