@@ -1,1 +1,1 @@
-web: serve -s front-end/build
+web: yarn run servermon
