@@ -71,3 +71,12 @@ interface MatchesResponseT {
     home: TeamsResponseT;
   };
 }
+
+interface ErrorResponseType {
+  response: {
+    data: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
