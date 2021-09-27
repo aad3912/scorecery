@@ -5,9 +5,11 @@ import authRouter from "./routes/auth.js";
 import privateRouter from "./routes/private.js";
 import connectDB from "./config/db.js";
 import errorHandler from "./middleware/error.js";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
 /* Setup */
-dotenv.config({ path: "./config.env" }); // access .env variables
+dotenv.config(); // access .env variables
 connectDB(); // connect to mongodb
 const app = express(); // use express
 const DEFAULT_PORT = 5000;
@@ -19,7 +21,20 @@ app.use(express.json()); // Populates req.body
 
 /* Connect Routes */
 app.use("/api/auth", authRouter); // auth
-app.use("/", privateRouter); // private route
+app.use("/api/", privateRouter); // private route
+if (process.env.NODE_ENV === "production") {
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  app.use(express.static(path.join(__dirname, "front-end", "build")));
+  app.get("*", (_req, res) => {
+    res
+      .status(200)
+      .sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+} else {
+  app.get("/", (_req, res) => {
+    res.status(200).send("Api running");
+  });
+}
 
 /* Error Handler */
 app.use(errorHandler);
