@@ -6,10 +6,11 @@
   "scripts": {
     "install-server": "yarn install",
     "install-client": "cd front-end/ && yarn install",
-    "installs": "concurrently \"npm run install-server\" \"npm run install-client\"",
-    "server": "nodemon app.js",
+    "installs": "concurrently \"yarn run install-server\" \"yarn run install-client\"",
+    "server": "node app.js",
+    "servermon": "nodemon app.js",
     "client": "cd front-end/ && yarn start",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"yarn run servermon\" \"yarn run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Aayush Dalal",
