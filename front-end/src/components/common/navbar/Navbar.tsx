@@ -11,25 +11,37 @@ import {
 } from "./NavbarElements";
 import MyLogo from "../../../img/logo512.png";
 
-const Navbar = () => (
-  <NavContainer>
-    <NavWrapper>
-      <LogoAndNameContainer to="/">
-        <Logo src={MyLogo} alt="/" />
-        <CompanyName>SC</CompanyName>
-      </LogoAndNameContainer>
-      <Bars />
-      <NavLinksContainer>
-        <NavLink to="/">Leagues</NavLink>
-        <NavLink to="/">Cups</NavLink>
-        <NavLink to="/">Teams</NavLink>
-        <NavLink to="/">Players</NavLink>
-      </NavLinksContainer>
-      <NavLinksContainer>
-        <ButtonLink to="/">Sign Up</ButtonLink>
-      </NavLinksContainer>
-    </NavWrapper>
-  </NavContainer>
-);
-
+const Navbar = () => {
+  const loggedIn = localStorage.getItem("authToken");
+  const logOut = (logOut: string | null) => {
+    if (logOut) {
+      localStorage.removeItem("authToken");
+    }
+  };
+  return (
+    <NavContainer>
+      <NavWrapper>
+        <LogoAndNameContainer to={loggedIn ? "/leagues" : "/"}>
+          <Logo src={MyLogo} alt="/" />
+          <CompanyName>SC</CompanyName>
+        </LogoAndNameContainer>
+        <Bars />
+        <NavLinksContainer>
+          <NavLink to="/leagues">Leagues</NavLink>
+          <NavLink to="/cups">Cups</NavLink>
+          <NavLink to="/teams">Teams</NavLink>
+          <NavLink to="/players">Players</NavLink>
+        </NavLinksContainer>
+        <NavLinksContainer>
+          <ButtonLink
+            to={loggedIn ? "/" : "/register"}
+            onClick={() => logOut(loggedIn)}
+          >
+            {loggedIn ? "Sign Out" : "Sign Up"}
+          </ButtonLink>
+        </NavLinksContainer>
+      </NavWrapper>
+    </NavContainer>
+  );
+};
 export default Navbar;

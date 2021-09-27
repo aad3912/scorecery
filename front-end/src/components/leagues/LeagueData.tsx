@@ -52,23 +52,23 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
 
   useEffect(() => {
     async function getStandings() {
-      // const params: StandingsParamsT = {
-      //   league: `${selectedId}`,
-      //   season: "2021",
-      // };
-      // const result = (await getFromApi(
-      //   "/standings",
-      //   params
-      // )) as StandingsResponseT[];
-      // setStandings(
-      //   result.length
-      //     ? result[0].league.standings.length
-      //       ? result[0].league.standings[0]
-      //       : []
-      //     : []
-      // );
+      const params: StandingsParamsT = {
+        league: `${selectedId}`,
+        season: "2021",
+      };
+      const result = (await getFromApi(
+        "/standings",
+        params
+      )) as StandingsResponseT[];
+      setStandings(
+        result.length
+          ? result[0].league.standings.length
+            ? result[0].league.standings[0]
+            : []
+          : []
+      );
       // setTimeout(getStandings, 10000);
-      setStandings(dummyStandings);
+      // setStandings(dummyStandings);
     }
     getStandings();
   }, [selectedId]);
@@ -80,11 +80,11 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
           league: `${selectedId}`,
           season: "2021",
         };
-        // const result = (await getFromApi(
-        //   "/fixtures",
-        //   params
-        // )) as MatchesResponseT[];
-        const result = dummyMatches;
+        const result = (await getFromApi(
+          "/fixtures",
+          params
+        )) as MatchesResponseT[];
+        // const result = dummyMatches;
         let { fixtures, started, results } = getFixtures(result);
         setFixtures(fixtures);
         setStarted(started);
