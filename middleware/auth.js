@@ -29,6 +29,6 @@ export const protect = async (req, _res, next) => {
 
     next();
   } catch (error) {
-    return next(error.message);
+    return next(error);
   }
 };

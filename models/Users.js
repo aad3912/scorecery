@@ -1,7 +1,17 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import crypto from "crypto";
+
+const LeagueSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Please provide name of league as name"],
+  },
+  _id: {
+    type: Number,
+    required: [true, "Please provide id of league as '_id'."],
+  },
+});
 
 const UserSchema = mongoose.Schema({
   username: {
@@ -23,8 +33,10 @@ const UserSchema = mongoose.Schema({
     minlength: [8, "Password must have atleast 8 characters"],
     select: false,
   },
-  resetPasswordToken: String,
-  resetPasswordExpire: Date,
+  leagues: {
+    type: [LeagueSchema],
+    default: [{ name: "Premier League", _id: 39 }],
+  },
 });
 
 // Important to NOT use an arrow function here
@@ -47,6 +59,14 @@ UserSchema.methods.getSignedToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
+};
+
+UserSchema.methods.addLeagues = function (leagues) {
+  this.leagues = this.leagues.concat(leagues);
+};
+
+UserSchema.methods.removeLeague = function (leagueId) {
+  this.leagues = this.leagues.filter((league) => league._id !== leagueId);
 };
 
 const UserModel = mongoose.model("User", UserSchema);
