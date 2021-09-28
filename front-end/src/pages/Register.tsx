@@ -19,6 +19,7 @@ export const RegisterWrapper = styled.div`
   justify-content: center;
   min-height: 80vh;
   color: #00f783;
+  padding: 20px 0;
 `;
 
 export const RegisterForm = styled.form`

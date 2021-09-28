@@ -15,7 +15,12 @@ export const FormButton = styled.button`
   border: none;
   margin-bottom: 10px;
 
-  &:hover {
+  @media screen and (max-width: 800px) {
+    transition: 0.05s all ease;
+  }
+
+  &:hover,
+  &:active {
     color: #37003c;
     background-color: #00f783;
   }
@@ -32,7 +37,12 @@ export const FormLink = styled(Link)`
   color: white;
   transition: 0.2s all ease-in;
 
-  &:hover {
+  @media screen and (max-width: 800px) {
+    transition: 0.05s all ease;
+  }
+
+  &:hover,
+  &:active {
     color: #00f783;
   }
 `;

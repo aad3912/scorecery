@@ -112,9 +112,9 @@ export const Bars = styled(FaBars)`
 
   @media screen and (max-width: 800px) {
     display: block;
-    font-size: 2rem;
     cursor: pointer;
     margin: 0px;
     padding: 0px;
+    height: 100%;
   }
 `;
