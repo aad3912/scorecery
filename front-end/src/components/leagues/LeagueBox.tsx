@@ -63,11 +63,11 @@ const LeagueBox = () => {
           )
         ) : (
           <Loading>
-            LOADING
+            Loading
             <br />
-            YOUR
+            your
             <br />
-            PREFERENCES
+            preferences
             <br />
             ...
           </Loading>
