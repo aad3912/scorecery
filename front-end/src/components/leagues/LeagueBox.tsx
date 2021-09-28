@@ -1,37 +1,37 @@
-import { useEffect, useState } from "react";
-import HorizontalSlider from "../horizontal-slider/HorizontalSlider";
+import { useContext, useEffect, useState } from "react";
+import HorizontalSlider from "../widgets/horizontal-slider/HorizontalSlider";
 import { LeagueBoxContainer, LeagueBoxWrapper } from "./LeagueBoxElements";
 import Loading from "../common/Loading";
+import LeagueWidgets from "./LeagueData";
+import AuthContext from "../../context/AuthContext";
 
 const INITIAL_ID = -1;
 const NOT_RETRIEVED = false;
-const RETRIEVED = true;
-const dummy: LeagueT[] = [
-  { name: "Premier League", id: 39, country: { name: "England", code: "GB" } },
-  { name: "Ligue 1", id: 61, country: { name: "France", code: "FR" } },
-  { name: "Bundesliga 1", id: 78, country: { name: "Germany", code: "DE" } },
-  { name: "Primera Division", id: 140, country: { name: "Spain", code: "ES" } },
-];
+// const dummy: LeagueDataT[] = [
+//   { name: "Premier League", _id: 39 },
+//   { name: "Ligue 1", _id: 61 },
+//   { name: "Bundesliga 1", _id: 78 },
+//   { name: "Primera Division", _id: 140 },
+// ];
 
 const LeagueBox = () => {
   const [selectedId, setSelectedId] = useState(INITIAL_ID);
-  const [data, setData] = useState<LeagueT[]>([]);
   const [retrieved, setRetrieved] = useState(NOT_RETRIEVED);
+  const {
+    state: { leagues },
+  } = useContext(AuthContext);
 
   useEffect(() => {
-    setData(dummy);
-  }, []);
-
-  useEffect(() => {
+    setRetrieved(false);
     setSelectedId((selectedId) =>
-      selectedId === INITIAL_ID
-        ? data.length
-          ? data[0].id
-          : INITIAL_ID
-        : selectedId
+      leagues.length
+        ? selectedId === INITIAL_ID
+          ? leagues[0]._id
+          : selectedId
+        : INITIAL_ID
     );
-    setRetrieved(RETRIEVED);
-  }, [data]);
+    setRetrieved(true);
+  }, [leagues]);
 
   const justifyAccordingly = {
     justifyContent:
@@ -52,19 +52,22 @@ const LeagueBox = () => {
               ......
             </Loading>
           ) : (
-            <HorizontalSlider
-              selectedId={selectedId}
-              data={data}
-              setSelectedId={setSelectedId}
-            />
+            <>
+              <HorizontalSlider
+                selectedId={selectedId}
+                data={leagues}
+                setSelectedId={setSelectedId}
+              />
+              <LeagueWidgets selectedId={selectedId} />
+            </>
           )
         ) : (
           <Loading>
-            LOADING
+            Loading
             <br />
-            YOUR
+            your
             <br />
-            PREFERENCES
+            preferences
             <br />
             ...
           </Loading>

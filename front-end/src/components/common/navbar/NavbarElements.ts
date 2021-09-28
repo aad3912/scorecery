@@ -17,7 +17,7 @@ export const NavContainer = styled.nav`
 `;
 
 export const NavWrapper = styled.div`
-  width: 80%;
+  width: 85%;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -41,7 +41,8 @@ export const LogoAndNameContainer = styled(LinkR)`
   gap: 10px;
   transition: all 0.2s ease-in-out;
 
-  &:hover {
+  &:hover,
+  &:focus {
     height: 85%;
   }
 `;
@@ -51,9 +52,7 @@ export const Logo = styled.img`
   height: 80%;
 `;
 
-export const CompanyName = styled.h1`
-  font-size: 2rem;
-`;
+export const CompanyName = styled.h1``;
 
 export const NavLinksContainer = styled.div`
   height: 75%;
@@ -82,7 +81,8 @@ export const NavLink = styled(LinkR)`
   transition: all 0.2s ease-in-out;
   outline: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: #37003c;
     background-color: #00f783;
   }
@@ -103,7 +103,8 @@ export const ButtonLink = styled(LinkR)`
   transition: all 0.2s ease-in-out;
   outline: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: #00f783;
     background-color: #37003c;
   }
@@ -114,9 +115,9 @@ export const Bars = styled(FaBars)`
 
   @media screen and (max-width: 800px) {
     display: block;
-    font-size: 2rem;
     cursor: pointer;
     margin: 0px;
     padding: 0px;
+    height: 100%;
   }
 `;

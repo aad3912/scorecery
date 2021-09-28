@@ -1,13 +1,85 @@
 type numInPx = `${number}px`;
 type numInPct = `${number}%`;
 
-interface GetParamsT {
-  current?: "true" | "false";
-  code?: string;
+type StandingsParamsT = {
+  league: `${number}`;
+  season: `${number}`;
+};
+
+type LeagueParamsT = {
+  current: "true" | "false";
+  code: string;
+};
+
+type MatchParamsT = {
+  league: `${number}`;
+  season: `${number}`;
+};
+
+type APIParamsT = StandingsParamsT | LeagueParamsT | MatchParamsT;
+
+type LocationT = `/${string}`;
+
+interface ResponseT {
+  response: SpecificResponseT[];
 }
 
-interface LeagueT {
+type SpecificResponseT = StandingsResponseT | LeagueDataT | MatchesResponseT;
+
+interface LeagueDataT {
   name: string;
+  _id: number;
+}
+
+interface StandingsResponseT {
+  league: {
+    standings: StandingsDataT[][];
+  };
+}
+
+interface TeamsResponseT {
+  name: string;
+  logo: string;
   id: number;
-  country: { name: string; code: string };
+}
+
+interface StandingsDataT {
+  form: string;
+  points: number;
+  team: TeamsResponseT;
+}
+
+interface MatchesResponseT {
+  fixture: {
+    date: string;
+    dateObj?: Date;
+    id: number;
+    status: {
+      short: string;
+    };
+    venue: {
+      name: string;
+    };
+  };
+  goals: {
+    away: number;
+    home: number;
+  };
+  teams: {
+    away: TeamsResponseT;
+    home: TeamsResponseT;
+  };
+}
+
+interface ErrorResponseType {
+  response: {
+    data: {
+      success: boolean;
+      error: string;
+    };
+  };
+}
+
+interface GlobalStateT {
+  leagues: LeagueDataT[];
 }

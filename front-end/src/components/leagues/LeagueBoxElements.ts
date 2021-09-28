@@ -6,14 +6,13 @@ export const LeagueBoxContainer = styled.main`
   align-items: center;
   flex-direction: column;
   font-size: 1rem;
-  min-height: 500px;
 `;
 
 export const LeagueBoxWrapper = styled.div`
-  width: 80%;
+  width: 85%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
   padding: 20px 0;
 
   @media screen and (max-width: 800px) {

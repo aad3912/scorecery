@@ -1,0 +1,31 @@
+{
+  "name": "scorecery",
+  "version": "1.0.0",
+  "description": "Back-end for scorecery.",
+  "main": "app.js",
+  "scripts": {
+    "install-server": "yarn install",
+    "install-client": "cd front-end/ && yarn install",
+    "installs": "concurrently \"yarn run install-server\" \"yarn run install-client\"",
+    "server": "node app.js",
+    "servermon": "nodemon app.js",
+    "client": "cd front-end/ && yarn start",
+    "dev": "concurrently \"yarn run servermon\" \"yarn run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aayush Dalal",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.7",
+    "nodemon": "^2.0.13"
+  },
+  "type": "module",
+  "devDependencies": {
+    "concurrently": "^6.2.2"
+  }
+}
