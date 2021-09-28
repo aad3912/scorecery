@@ -50,7 +50,8 @@ export const SidebarCloseIcon = styled(AiFillCloseSquare)`
   }
 
   &:active,
-  &:hover {
+  &:hover,
+  &:focus {
     transform: rotate(90deg);
     color: #37003c;
     background: #00f783;
@@ -68,7 +69,8 @@ export const SidebarLink = styled(Link)`
   transition: all 0.2s ease-in-out;
 
   &:active,
-  &:hover {
+  &:hover,
+  &:focus {
     background: #00f783;
     color: #37003c;
   }
@@ -78,7 +80,7 @@ export const SidebarLink = styled(Link)`
   }
 `;
 
-export const SiderbarButton = styled.div`
+export const SiderbarButtonLink = styled(Link)`
   width: 80%;
   background: #00f783;
   color: #37003c;
@@ -92,7 +94,8 @@ export const SiderbarButton = styled.div`
   transition: 0.2s all ease-in-out;
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     color: white;
   }
 

@@ -11,17 +11,23 @@ import {
 } from "./NavbarElements";
 import MyLogo from "../../../img/logo512.png";
 import Sidebar from "../sidebar/Sidebar";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import AuthContext from "../../../context/AuthContext";
+
+export const logOut = (
+  isAuth: boolean,
+  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (isAuth) {
+    setIsAuth(false);
+    localStorage.removeItem("authToken");
+  }
+};
 
 const Navbar = () => {
+  const { isAuth, setIsAuth } = useContext(AuthContext);
   const [showSidebar, setShowSidebar] = useState(false);
   const loggedIn = localStorage.getItem("authToken");
-  const logOut = (logOut: string | null) => {
-    if (logOut) {
-      localStorage.removeItem("authToken");
-    }
-  };
-  console.log(showSidebar);
   return (
     <>
       <Sidebar show={showSidebar} setShow={setShowSidebar} />
@@ -40,10 +46,10 @@ const Navbar = () => {
           </NavLinksContainer>
           <NavLinksContainer>
             <ButtonLink
-              to={loggedIn ? "/" : "/register"}
-              onClick={() => logOut(loggedIn)}
+              to={isAuth ? "/" : "/register"}
+              onClick={() => logOut(isAuth, setIsAuth)}
             >
-              {loggedIn ? "Sign Out" : "Sign Up"}
+              {isAuth ? "Sign Out" : "Sign Up"}
             </ButtonLink>
           </NavLinksContainer>
         </NavWrapper>

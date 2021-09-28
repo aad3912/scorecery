@@ -41,7 +41,8 @@ export const LogoAndNameContainer = styled(LinkR)`
   gap: 10px;
   transition: all 0.2s ease-in-out;
 
-  &:hover {
+  &:hover,
+  &:focus {
     height: 85%;
   }
 `;
@@ -80,7 +81,8 @@ export const NavLink = styled(LinkR)`
   transition: all 0.2s ease-in-out;
   outline: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: #37003c;
     background-color: #00f783;
   }
@@ -101,7 +103,8 @@ export const ButtonLink = styled(LinkR)`
   transition: all 0.2s ease-in-out;
   outline: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: #00f783;
     background-color: #37003c;
   }

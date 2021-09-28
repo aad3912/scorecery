@@ -1,17 +1,14 @@
-import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import { useContext } from "react";
 
 const LoggedOutRoute = ({ component: Component, ...rest }) => {
-  console.log("Here");
+  const { isAuth } = useContext(AuthContext);
   return (
     <Route
       {...rest}
       render={(props) =>
-        localStorage.getItem("authToken") ? (
-          <Redirect to="/leagues" />
-        ) : (
-          <Component {...props} />
-        )
+        isAuth ? <Redirect to="/leagues" /> : <Component {...props} />
       }
     />
   );

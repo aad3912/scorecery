@@ -6,7 +6,9 @@ interface PropsT {
 }
 
 const AuthProvider = (props: PropsT) => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(
+    localStorage.getItem("authToken") ? true : false
+  );
 
   return (
     <AuthContext.Provider value={{ isAuth, setIsAuth }}>

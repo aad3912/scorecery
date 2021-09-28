@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styled from "styled-components";
 import FormGroup from "../components/common/form-group/FormGroups";
@@ -11,6 +11,7 @@ import {
   FormError,
 } from "../components/common/FormElements";
 import Navbar from "../components/common/navbar/Navbar";
+import AuthContext from "../context/AuthContext";
 
 export const RegisterWrapper = styled.div`
   width: 100%;
@@ -59,6 +60,7 @@ const Register: React.FunctionComponent<RouteComponentProps> = ({
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const { setIsAuth } = useContext(AuthContext);
 
   const register = async (e: FormEvent) => {
     e.preventDefault();
@@ -80,6 +82,7 @@ const Register: React.FunctionComponent<RouteComponentProps> = ({
         password,
         email,
       });
+      setIsAuth(true);
       localStorage.setItem("authToken", token);
       history.push("/leagues");
     } catch (e) {

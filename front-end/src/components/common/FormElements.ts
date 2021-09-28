@@ -20,7 +20,8 @@ export const FormButton = styled.button`
   }
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     color: #37003c;
     background-color: #00f783;
   }
@@ -42,7 +43,8 @@ export const FormLink = styled(Link)`
   }
 
   &:hover,
-  &:active {
+  &:active,
+  &:focus {
     color: #00f783;
   }
 `;

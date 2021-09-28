@@ -4,7 +4,7 @@ import {
   SidebarContainer,
   SidebarLink,
   SidebarWrapper,
-  SiderbarButton,
+  SiderbarButtonLink,
 } from "./SidebarElements";
 import {
   useTransition,
@@ -13,12 +13,18 @@ import {
   useSpringRef,
   useSpring,
 } from "react-spring";
+import { useContext } from "react";
+import AuthContext from "../../../context/AuthContext";
+import { logOut } from "../navbar/Navbar";
 
 interface PropsT {
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 const Sidebar = ({ show, setShow }: PropsT) => {
+  const { isAuth, setIsAuth } = useContext(AuthContext);
+
   const sidebarRef = useSpringRef();
   const { size, ...rest } = useSpring({
     ref: sidebarRef,
@@ -63,12 +69,27 @@ const Sidebar = ({ show, setShow }: PropsT) => {
             size={35}
           />
         </CloseIconDiv>
-        <SidebarLink to="/leagues">Leagues</SidebarLink>
-        <SidebarLink to="/cups">Cups</SidebarLink>
-        <SidebarLink to="/players">Players</SidebarLink>
-        <SidebarLink to="/teams">Teams</SidebarLink>
-        <SiderbarButton>Log In</SiderbarButton>
-        <SiderbarButton>Sign up</SiderbarButton>
+        <SidebarLink onClick={() => setShow(false)} to="/leagues">
+          Leagues
+        </SidebarLink>
+        <SidebarLink onClick={() => setShow(false)} to="/cups">
+          Cups
+        </SidebarLink>
+        <SidebarLink onClick={() => setShow(false)} to="/players">
+          Players
+        </SidebarLink>
+        <SidebarLink onClick={() => setShow(false)} to="/teams">
+          Teams
+        </SidebarLink>
+        <SiderbarButtonLink
+          onClick={() => logOut(isAuth, setIsAuth)}
+          to={isAuth ? "/" : "/leagues"}
+        >
+          Log {isAuth ? "Out" : "In"}
+        </SiderbarButtonLink>
+        {!isAuth && (
+          <SiderbarButtonLink to="/register">Sign up</SiderbarButtonLink>
+        )}
       </SidebarWrapper>
     </SidebarContainer>
   );
