@@ -28,8 +28,7 @@ type SpecificResponseT = StandingsResponseT | LeagueDataT | MatchesResponseT;
 
 interface LeagueDataT {
   name: string;
-  id: number;
-  country: { name: string; code: string };
+  _id: number;
 }
 
 interface StandingsResponseT {
@@ -79,4 +78,8 @@ interface ErrorResponseType {
       error: string;
     };
   };
+}
+
+interface GlobalStateT {
+  leagues: LeagueDataT[];
 }

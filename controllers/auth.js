@@ -45,6 +45,7 @@ const sendToken = (user, res, status) => {
   const token = user.getSignedToken();
   res.status(status).json({
     success: true,
+    leagues: user.leagues,
     token,
   });
 };

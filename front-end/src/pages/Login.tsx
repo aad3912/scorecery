@@ -60,7 +60,7 @@ const Login: React.FunctionComponent<RouteComponentProps> = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { setIsAuth } = useContext(AuthContext);
+  const { setIsAuth, dispatch } = useContext(AuthContext);
 
   const login = async (e: FormEvent) => {
     e.preventDefault();
@@ -68,12 +68,13 @@ const Login: React.FunctionComponent<RouteComponentProps> = ({
     const emptyError = () => setTimeout(() => setError(""), ERROR_SHOW_TIME);
     try {
       const {
-        data: { token },
+        data: { token, leagues },
       } = await axios.post("/api/auth/login", {
         email,
         password,
       });
       setIsAuth(true);
+      dispatch({ type: "ADD_LEAGUES", payload: leagues });
       localStorage.setItem("authToken", token);
       history.push("/leagues");
     } catch (e) {

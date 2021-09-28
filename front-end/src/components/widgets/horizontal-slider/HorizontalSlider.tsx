@@ -12,14 +12,14 @@ const HorizontalSlider = ({ data, selectedId, setSelectedId }: PropsT) => {
       <InnerSlider>
         {data.map((league) => (
           <Button
-            key={league.id}
+            key={league._id}
             height="50px"
             bgColor="#37003c"
             color="#00f783"
             borderRadius="10px"
             display="flex"
-            onClick={() => setSelectedId(league.id)}
-            border={league.id === selectedId}
+            onClick={() => setSelectedId(league._id)}
+            border={league._id === selectedId}
             largeFont
           >
             {league.name}
