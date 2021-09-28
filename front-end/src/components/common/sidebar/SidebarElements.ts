@@ -28,7 +28,7 @@ export const SidebarWrapper = styled.div`
   align-items: center;
 `;
 
-export const CloseIconDiv = styled.div`
+export const CloseIconDiv = styled(animated.div)`
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -52,7 +52,6 @@ export const SidebarCloseIcon = styled(AiFillCloseSquare)`
   &:active,
   &:hover,
   &:focus {
-    transform: rotate(90deg);
     color: #37003c;
     background: #00f783;
   }
@@ -80,7 +79,7 @@ export const SidebarLink = styled(Link)`
   }
 `;
 
-export const SiderbarButtonLink = styled(Link)`
+export const SidebarButtonLink = styled(Link)`
   width: 80%;
   background: #00f783;
   color: #37003c;
