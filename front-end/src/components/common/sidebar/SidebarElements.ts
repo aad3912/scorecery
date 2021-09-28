@@ -91,11 +91,13 @@ export const SidebarButtonLink = styled(Link)`
   cursor: pointer;
   border-radius: 10px;
   transition: 0.2s all ease-in-out;
+  border: 3px solid transparent;
 
   &:hover,
   &:active,
   &:focus {
     color: white;
+    border: 3px solid white;
   }
 
   @media screen and (max-width: 800px) {

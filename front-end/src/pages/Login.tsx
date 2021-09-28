@@ -88,7 +88,7 @@ const Login: React.FunctionComponent<RouteComponentProps> = ({
       <Navbar />
       <LoginWrapper>
         <LoginForm onSubmit={login}>
-          <FormH1>Login Here</FormH1>
+          <FormH1>Login</FormH1>
           <FormError show={error}>{error}</FormError>
           <LoginFormGrid>
             <FormGroup
@@ -102,7 +102,7 @@ const Login: React.FunctionComponent<RouteComponentProps> = ({
             />
             <FormGroup
               placeholder="password"
-              labelText="Enter Password"
+              labelText="Enter your Password"
               type="password"
               id="password"
               required
