@@ -7,18 +7,12 @@ import AuthContext from "../../context/AuthContext";
 
 const INITIAL_ID = -1;
 const NOT_RETRIEVED = false;
-// const dummy: LeagueDataT[] = [
-//   { name: "Premier League", _id: 39 },
-//   { name: "Ligue 1", _id: 61 },
-//   { name: "Bundesliga 1", _id: 78 },
-//   { name: "Primera Division", _id: 140 },
-// ];
 
 const LeagueBox = () => {
   const [selectedId, setSelectedId] = useState(INITIAL_ID);
   const [retrieved, setRetrieved] = useState(NOT_RETRIEVED);
   const {
-    state: { leagues },
+    userState: { leagues },
   } = useContext(AuthContext);
 
   useEffect(() => {

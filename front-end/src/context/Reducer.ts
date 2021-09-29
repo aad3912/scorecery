@@ -1,15 +1,23 @@
 import LeagueActionsT from "./leagues/actionTypes";
 import leagueReducer from "./leagues/reducer";
 
-type ActionT = LeagueActionsT;
+export type ActionT =
+  | LeagueActionsT
+  | { type: "SET_USERNAME"; payload: string };
 
-const reducer = (state: GlobalStateT, action: ActionT): GlobalStateT => {
+const reducer = (
+  userState: GlobalUserStateT,
+  action: ActionT
+): GlobalUserStateT => {
   switch (action.type) {
     case "ADD_LEAGUES":
     case "REMOVE_LEAGUE":
-      return leagueReducer(state, action);
+    case "SET_LEAGUES":
+      return leagueReducer(userState, action);
+    case "SET_USERNAME":
+      return { ...userState, username: action.payload };
     default:
-      return state;
+      return userState;
   }
 };
 

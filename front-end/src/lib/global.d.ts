@@ -8,7 +8,6 @@ type StandingsParamsT = {
 
 type LeagueParamsT = {
   current: "true" | "false";
-  code: string;
 };
 
 type MatchParamsT = {
@@ -24,7 +23,10 @@ interface ResponseT {
   response: SpecificResponseT[];
 }
 
-type SpecificResponseT = StandingsResponseT | LeagueDataT | MatchesResponseT;
+type SpecificResponseT =
+  | StandingsResponseT
+  | LeaguesResponseT
+  | MatchesResponseT;
 
 interface LeagueDataT {
   name: string;
@@ -41,6 +43,24 @@ interface TeamsResponseT {
   name: string;
   logo: string;
   id: number;
+}
+
+interface LeaguesResponseT {
+  league: {
+    id: number;
+    name: string;
+    type: string;
+    logo: string;
+  };
+  country: {
+    name: string;
+    code: string;
+  };
+}
+
+interface SelectOption {
+  value: number;
+  label: string;
 }
 
 interface StandingsDataT {
@@ -80,6 +100,7 @@ interface ErrorResponseType {
   };
 }
 
-interface GlobalStateT {
+interface GlobalUserStateT {
   leagues: LeagueDataT[];
+  username: string;
 }

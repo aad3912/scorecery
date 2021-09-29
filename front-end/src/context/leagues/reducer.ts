@@ -1,16 +1,21 @@
 import LeagueActionsT from "./actionTypes";
 
-const leagueReducer = (state: GlobalStateT, action: LeagueActionsT) => {
+const leagueReducer = (userState: GlobalUserStateT, action: LeagueActionsT) => {
   switch (action.type) {
     case "ADD_LEAGUES":
-      return { ...state, leagues: state.leagues.concat(action.payload) };
+      return {
+        ...userState,
+        leagues: userState.leagues.concat(action.payload),
+      };
     case "REMOVE_LEAGUE":
       return {
-        ...state,
-        leagues: state.leagues.filter(
+        ...userState,
+        leagues: userState.leagues.filter(
           (league) => league._id !== action.payload._id
         ),
       };
+    case "SET_LEAGUES":
+      return { ...userState, leagues: action.payload };
   }
 };
 

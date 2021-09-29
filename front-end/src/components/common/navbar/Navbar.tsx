@@ -27,14 +27,13 @@ export const logOut = (
 const Navbar = () => {
   const { isAuth, setIsAuth } = useContext(AuthContext);
   const [showSidebar, setShowSidebar] = useState(false);
-  const loggedIn = localStorage.getItem("authToken");
   return (
     <>
       <Sidebar show={showSidebar} setShow={setShowSidebar} />
       <NavContainer>
         <NavWrapper>
-          <LogoAndNameContainer to={loggedIn ? "/leagues" : "/"}>
-            <Logo src={MyLogo} alt="/" />
+          <LogoAndNameContainer to="/">
+            <Logo src={MyLogo} alt="home" />
             <CompanyName>SC</CompanyName>
           </LogoAndNameContainer>
           <Bars size={35} onClick={() => setShowSidebar((prev) => !prev)} />
