@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Select, { Props } from "react-select";
 import makeAnimated from "react-select/animated";
+import AuthContext from "../../../context/AuthContext";
 import { getFromApi } from "../../common/constants";
 
 const animatedComponents = makeAnimated();
@@ -15,35 +16,38 @@ const dummyLeagues: SelectOption[] = [
 
 interface PropsT {
   setSelectedLeagues: React.Dispatch<React.SetStateAction<SelectOption[]>>;
-  selectedLeagues: SelectOption[];
 }
 
-const LeaguesSelector = ({ selectedLeagues, setSelectedLeagues }: PropsT) => {
+const LeaguesSelector = ({ setSelectedLeagues }: PropsT) => {
   const [leagues, setLeagues] = useState<SelectOption[]>([]);
+  const { userState } = useContext(AuthContext);
   useEffect(() => {
     async function getLeagues() {
-      // const params: LeagueParamsT = {
-      //   current: "true",
-      // };
-
-      // const options = (await getFromApi(
-      //   "/leagues",
-      //   params
-      // )) as LeaguesResponseT[];
-      // const result = options
-      //   .filter((competition) => competition.league.type === "League")
-      //   .map((competition) => {
-      //     return {
-      //       value: competition.league.id,
-      //       label: `${competition.league.name} (${competition.country.name})`,
-      //     };
-      //   });
-      // console.log(result);
-      // setLeagues(result);
-      setLeagues(dummyLeagues);
+      const params: LeagueParamsT = {
+        current: "true",
+      };
+      const userLeagueSet = new Set(userState.leagues.map((x) => x._id));
+      const options = (await getFromApi(
+        "/leagues",
+        params
+      )) as LeaguesResponseT[];
+      const result = options
+        .filter(
+          (competition) =>
+            competition.league.type === "League" &&
+            !userLeagueSet.has(competition.league.id)
+        )
+        .map((competition) => {
+          return {
+            value: competition.league.id,
+            label: `${competition.league.name} [${competition.country.name}]`,
+          };
+        });
+      setLeagues(result);
+      // setLeagues(dummyLeagues);
     }
     getLeagues();
-  }, []);
+  }, [userState.leagues]);
   return (
     <Select
       components={animatedComponents}
