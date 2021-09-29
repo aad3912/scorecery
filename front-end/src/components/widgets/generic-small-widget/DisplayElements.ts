@@ -65,6 +65,8 @@ export const DisplayTD = styled.td`
   padding: 5px;
   border-bottom: 1px solid white;
   border-right: 1px solid white;
+  max-width: 200px;
+  word-wrap: break-word;
 `;
 
 export const DisplayTR = styled.tr``;

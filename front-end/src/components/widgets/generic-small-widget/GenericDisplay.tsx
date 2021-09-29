@@ -32,7 +32,10 @@ const GenericDisplay = ({ retrieved, data, results }: PropsT) => {
                 <DisplayTable>
                   <DisplayTHead>
                     <DisplayTR>
-                      <DisplayTH>Date</DisplayTH>
+                      <DisplayTH>
+                        Date {"&"} <br /> Time
+                      </DisplayTH>
+                      <DisplayTH>Venue</DisplayTH>
                       <DisplayTH>
                         Home
                         {results && (
@@ -54,15 +57,17 @@ const GenericDisplay = ({ retrieved, data, results }: PropsT) => {
                     </DisplayTR>
                   </DisplayTHead>
                   <DisplayTBody>
-                    {data.map((match, index) => {
+                    {data.map((match) => {
                       return (
-                        /* TODO: CHANGE KEY BACK TO result.fixture.id */
-                        <DisplayTR key={index}>
+                        <DisplayTR key={match.fixture.id}>
                           <DisplayTD>
                             {match.fixture.dateObj?.toLocaleDateString("gb")}
                             <br />
-                            {match.fixture.venue.name}
+                            {match.fixture.dateObj
+                              ?.toLocaleTimeString("gb")
+                              .substring(0, 5)}
                           </DisplayTD>
+                          <DisplayTD>{match.fixture.venue.name}</DisplayTD>
                           <DisplayTD>
                             {match.teams.home.name}
                             {results && (
