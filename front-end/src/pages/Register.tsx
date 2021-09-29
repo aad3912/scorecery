@@ -60,7 +60,7 @@ const Register: React.FunctionComponent<RouteComponentProps> = ({
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const { setIsAuth } = useContext(AuthContext);
+  const { setIsAuth, userDispatch } = useContext(AuthContext);
 
   const register = async (e: FormEvent) => {
     e.preventDefault();
@@ -76,15 +76,17 @@ const Register: React.FunctionComponent<RouteComponentProps> = ({
     }
     try {
       const {
-        data: { token },
+        data: { token, leagues },
       } = await axios.post("/api/auth/register", {
         username,
         password,
         email,
       });
       setIsAuth(true);
+      userDispatch({ type: "SET_LEAGUES", payload: leagues });
+      userDispatch({ type: "SET_USERNAME", payload: username });
       localStorage.setItem("authToken", token);
-      history.push("/leagues");
+      history.push("/home");
     } catch (e) {
       const error = (e as ErrorResponseType).response.data.error;
       setError(error.replace("User validation failed: ", ""));

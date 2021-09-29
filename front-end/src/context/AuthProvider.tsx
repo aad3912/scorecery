@@ -11,9 +11,14 @@ const AuthProvider = (props: PropsT) => {
     localStorage.getItem("authToken") ? true : false
   );
 
-  const [state, dispatch] = useReducer(reducer, { leagues: [] });
+  const [userState, userDispatch] = useReducer(reducer, {
+    leagues: [],
+    username: "",
+  });
   return (
-    <AuthContext.Provider value={{ isAuth, setIsAuth, state, dispatch }}>
+    <AuthContext.Provider
+      value={{ isAuth, setIsAuth, userState, userDispatch }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

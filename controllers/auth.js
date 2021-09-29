@@ -46,6 +46,7 @@ const sendToken = (user, res, status) => {
   res.status(status).json({
     success: true,
     leagues: user.leagues,
+    username: user.username,
     token,
   });
 };

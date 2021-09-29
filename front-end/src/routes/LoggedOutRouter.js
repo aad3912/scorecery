@@ -8,7 +8,7 @@ const LoggedOutRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isAuth ? <Redirect to="/leagues" /> : <Component {...props} />
+        isAuth ? <Redirect to="/home" /> : <Component {...props} />
       }
     />
   );
