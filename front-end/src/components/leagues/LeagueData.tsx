@@ -3,7 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { getFromApi } from "../common/constants";
 import GenericDisplay from "../widgets/generic-small-widget/GenericDisplay";
 import StandingsWidget from "../widgets/standings/Standings";
-import { LargerWidgets, LeagueInfo, SmallerWidgets } from "./DataElements";
+import {
+  LargerWidgets,
+  LeagueInfoContainer,
+  SmallerWidgets,
+} from "./DataElements";
 import dummyStandings from "../dummy/DummyStandings";
 import dummyMatches from "../dummy/DummyMatches";
 
@@ -52,23 +56,23 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
 
   useEffect(() => {
     async function getStandings() {
-      // const params: StandingsParamsT = {
-      //   league: `${selectedId}`,
-      //   season: "2021",
-      // };
-      // const result = (await getFromApi(
-      //   "/standings",
-      //   params
-      // )) as StandingsResponseT[];
-      // setStandings(
-      //   result.length
-      //     ? result[0].league.standings.length
-      //       ? result[0].league.standings[0]
-      //       : []
-      //     : []
-      // );
+      const params: StandingsParamsT = {
+        league: `${selectedId}`,
+        season: "2021",
+      };
+      const result = (await getFromApi(
+        "/standings",
+        params
+      )) as StandingsResponseT[];
+      setStandings(
+        result.length
+          ? result[0].league.standings.length
+            ? result[0].league.standings[0]
+            : []
+          : []
+      );
       // setTimeout(getStandings, 10000);
-      setStandings(dummyStandings);
+      // setStandings(dummyStandings);
     }
     getStandings();
   }, [selectedId]);
@@ -80,11 +84,11 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
           league: `${selectedId}`,
           season: "2021",
         };
-        // const result = (await getFromApi(
-        //   "/fixtures",
-        //   params
-        // )) as MatchesResponseT[];
-        const result = dummyMatches;
+        const result = (await getFromApi(
+          "/fixtures",
+          params
+        )) as MatchesResponseT[];
+        // const result = dummyMatches;
         let { fixtures, started, results } = getFixtures(result);
         setFixtures(fixtures);
         setStarted(started);
@@ -96,7 +100,7 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
   }, [selectedId, standings]);
 
   return (
-    <LeagueInfo>
+    <LeagueInfoContainer>
       <LargerWidgets>
         <StandingsWidget standings={standings} retrieved={retrieved} />
       </LargerWidgets>
@@ -104,7 +108,7 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
         <GenericDisplay retrieved={retrieved} results={false} data={fixtures} />
         <GenericDisplay retrieved={retrieved} results={true} data={results} />
       </SmallerWidgets>
-    </LeagueInfo>
+    </LeagueInfoContainer>
   );
 };
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LeagueInfo = styled.div`
+export const LeagueInfoContainer = styled.div`
   background-color: #37003c;
   width: 100%;
   border-radius: 10px;

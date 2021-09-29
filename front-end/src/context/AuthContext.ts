@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import LeagueActionsT from "./leagues/actionTypes";
 import { ActionT } from "./Reducer";
 
 interface GlobalContextT {
