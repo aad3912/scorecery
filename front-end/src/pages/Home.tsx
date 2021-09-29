@@ -1,49 +1,19 @@
 import { FormEvent, useContext, useState } from "react";
-import styled from "styled-components";
 import Footer from "../components/common/footer/Footer";
 import Navbar from "../components/common/navbar/Navbar";
 import LeaguesSelector from "../components/widgets/leagues-select/LeaguesSelector";
 import AuthContext from "../context/AuthContext";
-import { animated } from "react-spring";
 import { FormButton, FormError } from "../components/common/FormElements";
 import axios from "axios";
 import { RouterProps } from "react-router";
-
-export const HomeContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 20px;
-`;
-
-export const HomeWrapper = styled.div`
-  display: flex;
-  width: 85%;
-  min-height: calc(100vh - 80px);
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-
-  @media screen and (max-width: 800px) {
-    width: 90%;
-  }
-`;
-
-export const HomeWelcomeText = styled(animated.h1)`
-  width: 100%;
-  text-align: center;
-`;
-
-export const HomeH2 = styled.h2`
-  width: 100%;
-`;
-
-export const HomeForm = styled(animated.form)`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
+import {
+  HomeContainer,
+  HomeWrapper,
+  HomeWelcomeText,
+  HomeForm,
+  HomeH2,
+} from "../components/home/HomeElements";
+import { config, useChain, useSpring, useSpringRef } from "@react-spring/core";
 
 const Home = ({ history }: RouterProps) => {
   const [selectedLeagues, setSelectedLeagues] = useState<SelectOption[]>([]);
@@ -88,12 +58,26 @@ const Home = ({ history }: RouterProps) => {
       return emptyError();
     }
   };
+
+  const welcomeTextRef = useSpringRef();
+  const x = useSpring({
+    ref: welcomeTextRef,
+    config: { duration: 1500 },
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  });
+
+  useChain([welcomeTextRef], [0]);
+  // , show ? [0, 0.25, 0.75, 1.25] : [0, 0.5, 1, 1.5]);
+
   return (
     <>
       <Navbar />
       <HomeContainer>
         <HomeWrapper>
-          <HomeWelcomeText>Welcome, {userState.username}</HomeWelcomeText>
+          <HomeWelcomeText style={x}>
+            Welcome, {userState.username}
+          </HomeWelcomeText>
           <HomeForm onSubmit={(e) => onSubmitForm(e, addLeagues)}>
             <FormError show={error}>{error}</FormError>
             <HomeH2>Add Leagues</HomeH2>
