@@ -56,48 +56,41 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
 
   useEffect(() => {
     async function getStandings() {
-      const params: StandingsParamsT = {
+      const paramsStandings: StandingsParamsT = {
         league: `${selectedId}`,
         season: "2021",
       };
-      const result = (await getFromApi(
+      const paramsMatches: MatchParamsT = {
+        league: `${selectedId}`,
+        season: "2021",
+      };
+      const resultStandings = (await getFromApi(
         "/standings",
-        params
+        paramsStandings
       )) as StandingsResponseT[];
+      const resultMatches = (await getFromApi(
+        "/fixtures",
+        paramsMatches
+      )) as MatchesResponseT[];
+      console.log(resultMatches);
+      // const result = dummyMatches;
+      let { fixtures, started, results } = getFixtures(resultMatches);
       setStandings(
-        result.length
-          ? result[0].league.standings.length
-            ? result[0].league.standings[0]
+        resultStandings.length
+          ? resultStandings[0].league.standings.length
+            ? resultStandings[0].league.standings[0]
             : []
           : []
       );
+      setFixtures(fixtures);
+      setStarted(started);
+      setResults(results);
+      setRetrieved(true);
       // setTimeout(getStandings, 10000);
       // setStandings(dummyStandings);
     }
     getStandings();
   }, [selectedId]);
-
-  useEffect(() => {
-    if (standings.length) {
-      async function getMatches() {
-        const params: MatchParamsT = {
-          league: `${selectedId}`,
-          season: "2021",
-        };
-        const result = (await getFromApi(
-          "/fixtures",
-          params
-        )) as MatchesResponseT[];
-        // const result = dummyMatches;
-        let { fixtures, started, results } = getFixtures(result);
-        setFixtures(fixtures);
-        setStarted(started);
-        setResults(results);
-        setRetrieved(true);
-      }
-      getMatches();
-    }
-  }, [selectedId, standings]);
 
   return (
     <LeagueInfoContainer>
