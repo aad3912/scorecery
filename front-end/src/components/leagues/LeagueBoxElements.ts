@@ -6,6 +6,7 @@ export const LeagueBoxContainer = styled.main`
   align-items: center;
   flex-direction: column;
   font-size: 1rem;
+  min-height: calc(100vh - 80px);
 `;
 
 export const LeagueBoxWrapper = styled.div`
