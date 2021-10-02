@@ -2,7 +2,10 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
 import Footer from "../components/common/footer/Footer";
 import Navbar from "../components/common/navbar/Navbar";
-import LeaguesSelector from "../components/widgets/leagues-select/LeaguesSelector";
+import {
+  LeaguesSelector,
+  LeaguesSelectorMulti,
+} from "../components/widgets/leagues-select/LeaguesSelector";
 import AuthContext from "../context/AuthContext";
 import { FormButton, FormError } from "../components/common/FormElements";
 import axios from "axios";
@@ -31,6 +34,10 @@ const Home = ({ history }: RouterProps) => {
   const [error, setError] = useState("");
   const [addOptionsL, setAddOptionsL] = useState<SelectOption[]>([]);
   const [toBeAddedL, setToBeAddedL] = useState<SelectOption[]>([]);
+  const [toBeRemovedL, setToBeRemovedL] = useState<SelectOption>({
+    label: "none",
+    value: -1,
+  });
 
   const emptyError = () => setTimeout(() => setError(""), 5000);
 
@@ -81,6 +88,27 @@ const Home = ({ history }: RouterProps) => {
     }
   };
 
+  const removeLeagues = async () => {
+    try {
+      await axios.post(
+        "/api/leagues/remove",
+        { leagueId: toBeRemovedL.value },
+        { headers: { Authorization: getAuthHeader() } }
+      );
+      userDispatch({
+        type: "REMOVE_LEAGUE",
+        payload: { name: toBeRemovedL.label, _id: toBeRemovedL.value },
+      });
+      setLoading(false);
+      history.push("/leagues");
+    } catch (e) {
+      const error = (e as ErrorResponseType).response.data.error;
+      setError(error);
+      setLoading(false);
+      return emptyError();
+    }
+  };
+
   const onSubmitForm = (e: FormEvent, f: () => void) => {
     e.preventDefault();
     if (!loading) {
@@ -112,9 +140,25 @@ const Home = ({ history }: RouterProps) => {
           <HomeForm onSubmit={(e) => onSubmitForm(e, addLeagues)}>
             <FormError show={error}>{error}</FormError>
             <HomeH2>Add Leagues</HomeH2>
-            <LeaguesSelector options={addOptionsL} setter={setToBeAddedL} />
+            <LeaguesSelectorMulti
+              options={addOptionsL}
+              setter={setToBeAddedL}
+            />
             <FormButton type="submit">
               {loading ? "Adding Leagues..." : "Add"}
+            </FormButton>
+          </HomeForm>
+          <HomeForm onSubmit={(e) => onSubmitForm(e, removeLeagues)}>
+            <FormError show={error}>{error}</FormError>
+            <HomeH2>Remove Leagues</HomeH2>
+            <LeaguesSelector
+              options={userState.leagues.map((league) => {
+                return { label: `${league.name}`, value: league._id };
+              })}
+              setter={setToBeRemovedL}
+            />
+            <FormButton type="submit">
+              {loading ? "Removing Leagues..." : "Remove"}
             </FormButton>
           </HomeForm>
         </HomeWrapper>
