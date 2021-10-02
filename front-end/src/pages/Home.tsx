@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FormEvent, useContext, useEffect, useState } from "react";
 import Footer from "../components/common/footer/Footer";
 import Navbar from "../components/common/navbar/Navbar";
@@ -35,25 +36,26 @@ const Home = ({ history }: RouterProps) => {
 
   useEffect(() => {
     async function getLeagues() {
-      const params: LeagueParamsT = { current: "true" };
-      const result = (await getFromApi(
-        "/leagues",
-        params
-      )) as LeaguesResponseT[];
-      const leagueSet = new Set(userState.leagues.map((league) => league._id));
-      setAddOptionsL(
-        result
-          .filter(
-            (match) =>
-              !leagueSet.has(match.league.id) && match.league.type === "League"
-          )
-          .map((match) => {
-            return {
-              label: `${match.league.name} [${match.country.name}]`,
-              value: match.league.id,
-            };
-          })
-      );
+      // const params: LeagueParamsT = { current: "true" };
+      // const result = (await getFromApi(
+      //   "/leagues",
+      //   params
+      // )) as LeaguesResponseT[];
+      // const leagueSet = new Set(userState.leagues.map((league) => league._id));
+      // setAddOptionsL(
+      //   result
+      //     .filter(
+      //       (match) =>
+      //         !leagueSet.has(match.league.id) && match.league.type === "League"
+      //     )
+      //     .map((match) => {
+      //       return {
+      //         label: `${match.league.name} [${match.country.name}]`,
+      //         value: match.league.id,
+      //       };
+      //     })
+      // );
+      setAddOptionsL(dummyLeagues);
     }
     getLeagues();
   }, [userState.leagues]);

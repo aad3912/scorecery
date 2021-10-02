@@ -74,8 +74,8 @@ const Login: React.FunctionComponent<RouteComponentProps> = ({
         password,
       });
       setIsAuth(true);
-      userDispatch({ type: "SET_LEAGUES", payload: leagues });
       userDispatch({ type: "SET_USERNAME", payload: username });
+      userDispatch({ type: "SET_LEAGUES", payload: leagues });
       localStorage.setItem("authToken", token);
       history.push("/home");
     } catch (e) {
