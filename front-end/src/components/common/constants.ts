@@ -23,3 +23,8 @@ export const getFromApi = async (
 
 export const getAuthHeader = () =>
   `Bearer ${localStorage.getItem("authToken")}`;
+
+const ERROR_SHOW_TIME = 3000;
+export const emptyError = (
+  setError: React.Dispatch<React.SetStateAction<string>>
+) => setTimeout(() => setError(""), ERROR_SHOW_TIME);
