@@ -19,7 +19,7 @@ import {
 } from "../components/home/HomeElements";
 import { getAuthHeader, getFromApi } from "../components/common/constants";
 import { dummyLeagues } from "../components/dummy/DummyLeagues";
-// import { config, useChain, useSpring, useSpringRef } from "@react-spring/core";
+import { config, useChain, useSpring, useSpringRef } from "react-spring";
 
 const Home = ({ history }: RouterProps) => {
   const { userState, userDispatch } = useContext(AuthContext);
@@ -113,45 +113,67 @@ const Home = ({ history }: RouterProps) => {
     }
   };
 
-  // const welcomeTextRef = useSpringRef();
-  // const x = useSpring({
-  //   ref: welcomeTextRef,
-  //   config: { duration: 1500 },
-  //   from: { opacity: 0 },
-  //   to: { opacity: 1 },
-  // });
+  const welcomeTextRef = useSpringRef();
+  const welcomeTextStyle = useSpring({
+    ref: welcomeTextRef,
+    config: { duration: 1000 },
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  });
 
-  // useChain([welcomeTextRef], [0]);
-  // , show ? [0, 0.25, 0.75, 1.25] : [0, 0.5, 1, 1.5]);
+  const addLeaguesRef = useSpringRef();
+  const addLeagueStyle = useSpring({
+    ref: addLeaguesRef,
+    config: { duration: 500 },
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  });
+
+  const removeLeaguesRef = useSpringRef();
+  const removeLeagueStyle = useSpring({
+    ref: removeLeaguesRef,
+    config: { duration: 500 },
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+  });
+
+  useChain([welcomeTextRef, addLeaguesRef, removeLeaguesRef], [0, 0.5, 0.5]);
 
   return (
     <>
       <Navbar />
       <HomeContainer>
         <HomeWrapper>
-          <HomeWelcomeText>Welcome, {userState.username}</HomeWelcomeText>
-          <HomeForm onSubmit={(e) => onSubmitForm(e, addLeagues)}>
-            <FormError show={error}>{error}</FormError>
+          <HomeWelcomeText style={{ ...welcomeTextStyle }}>
+            Welcome, {userState.username}
+          </HomeWelcomeText>
+          <FormError show={error}>{error}</FormError>
+          <HomeForm
+            style={{ ...addLeagueStyle }}
+            onSubmit={(e) => onSubmitForm(e, addLeagues)}
+          >
             <HomeH2>Add Leagues</HomeH2>
             <LeaguesSelectorMulti
               options={addOptionsL}
               setter={setToBeAddedL}
             />
-            <FormButton type="submit">
-              {loading ? "Adding Leagues..." : "Add"}
+            <FormButton disabled={loading} type="submit">
+              {loading ? "Processing..." : "Add"}
             </FormButton>
           </HomeForm>
-          <HomeForm onSubmit={(e) => onSubmitForm(e, removeLeagues)}>
-            <FormError show={error}>{error}</FormError>
-            <HomeH2>Remove Leagues</HomeH2>
+          <HomeForm
+            style={{ ...removeLeagueStyle }}
+            onSubmit={(e) => onSubmitForm(e, removeLeagues)}
+          >
+            <HomeH2>Remove a League</HomeH2>
             <LeaguesSelector
               options={userState.leagues.map((league) => {
                 return { label: `${league.name}`, value: league._id };
               })}
               setter={setToBeRemovedL}
             />
-            <FormButton type="submit">
-              {loading ? "Removing Leagues..." : "Remove"}
+            <FormButton disabled={loading} type="submit">
+              {loading ? "Processing..." : "Remove"}
             </FormButton>
           </HomeForm>
         </HomeWrapper>

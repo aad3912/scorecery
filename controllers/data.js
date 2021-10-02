@@ -3,7 +3,7 @@ import ErrorResponse from "../utils/errorResponse.js";
 export const addLeagues = async (req, res, next) => {
   const { leagues } = req.body;
   if (!(leagues && leagues.length)) {
-    const message = "No 'leagues' object provided.";
+    const message = "Please provide some leagues to add.";
     return next(new ErrorResponse(message, 400));
   }
   const user = req.user;
@@ -24,6 +24,12 @@ export const removeLeague = async (req, res, next) => {
     const message = "'leagueId' must be provided (as a number).";
     return next(new ErrorResponse(message, 400));
   }
+
+  if (leagueId < 0) {
+    const message = "Please chose a (valid) league id.";
+    return next(new ErrorResponse(message, 400));
+  }
+
   const user = req.user;
   try {
     user.removeLeague(leagueId);

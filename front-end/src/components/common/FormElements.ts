@@ -14,6 +14,7 @@ export const FormButton = styled.button`
   text-align: center;
   border: none;
   margin-bottom: 10px;
+  color: #37003c;
 
   @media screen and (max-width: 800px) {
     transition: 0.05s all ease;
@@ -22,8 +23,17 @@ export const FormButton = styled.button`
   &:hover,
   &:active,
   &:focus {
-    color: #37003c;
     background-color: #00f783;
+    box-shadow: 0px 0px 5px black;
+    color: white;
+  }
+
+  &:disabled,
+  button[disabled] {
+    background: grey;
+    color: #37003c;
+    box-shadow: none;
+    cursor: not-allowed;
   }
 `;
 
@@ -60,14 +70,21 @@ interface PropsT {
 }
 
 export const FormError = styled.span`
+  text-transform: uppercase;
   width: 100%;
   font-size: 1.3rem;
+  padding: ${(props: PropsT) => (props.show ? "5px" : "0px")};
   background: red;
   color: white;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: ${(props: PropsT) => (props.show ? "40px" : "0px")};
+  height: ${(props: PropsT) => (props.show ? "41px" : "0px")};
   transition: height 0.1s ease-in-out;
   margin-bottom: ${(props: PropsT) => (props.show ? "30px" : "0px")};
+
+  @media screen and (max-width: 800px) {
+    height: ${(props: PropsT) => (props.show ? "82px" : "0px")};
+    text-transform: initial;
+  }
 `;
