@@ -2,12 +2,17 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 const animatedComponents = makeAnimated();
-interface PropsT {
+interface PropsMultiT {
   options: SelectOption[];
   setter: React.Dispatch<React.SetStateAction<SelectOption[]>>;
 }
 
-const LeaguesSelector = ({ options, setter }: PropsT) => {
+interface PropsSingleT {
+  options: SelectOption[];
+  setter: React.Dispatch<React.SetStateAction<SelectOption>>;
+}
+
+export const LeaguesSelectorMulti = ({ options, setter }: PropsMultiT) => {
   return (
     <Select
       components={animatedComponents}
@@ -18,4 +23,11 @@ const LeaguesSelector = ({ options, setter }: PropsT) => {
   );
 };
 
-export default LeaguesSelector;
+export const LeaguesSelector = ({ options, setter }: PropsSingleT) => {
+  return (
+    <Select
+      onChange={(newValue) => setter(newValue as SelectOption)}
+      options={options}
+    />
+  );
+};
