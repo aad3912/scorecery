@@ -18,15 +18,8 @@ import {
   HomeH2,
 } from "../components/home/HomeElements";
 import { getAuthHeader, getFromApi } from "../components/common/constants";
+import { dummyLeagues } from "../components/dummy/DummyLeagues";
 // import { config, useChain, useSpring, useSpringRef } from "@react-spring/core";
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const dummyLeagues: SelectOption[] = [
-  { label: "Premier League", value: 39 },
-  { label: "Ligue 1", value: 61 },
-  { label: "Bundesliga 1", value: 78 },
-  { label: "Primera Division", value: 140 },
-];
 
 const Home = ({ history }: RouterProps) => {
   const { userState, userDispatch } = useContext(AuthContext);
