@@ -1,4 +1,4 @@
-import { ReactNode, useReducer, useState } from "react";
+import { ReactNode, useEffect, useReducer, useState } from "react";
 import AuthContext from "./AuthContext";
 import reducer from "./Reducer";
 
@@ -7,14 +7,26 @@ interface PropsT {
 }
 
 const AuthProvider = (props: PropsT) => {
-  const [isAuth, setIsAuth] = useState(
-    localStorage.getItem("authToken") ? true : false
-  );
-
+  const [isAuth, setIsAuth] = useState(false);
   const [userState, userDispatch] = useReducer(reducer, {
     leagues: [],
     username: "",
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      setIsAuth(true);
+      userDispatch({
+        type: "SET_USERNAME",
+        payload: localStorage.getItem("username") || "",
+      });
+      userDispatch({
+        type: "SET_LEAGUES",
+        payload: JSON.parse(localStorage.getItem("leagues") || ""),
+      });
+    }
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{ isAuth, setIsAuth, userState, userDispatch }}

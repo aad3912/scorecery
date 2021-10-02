@@ -21,6 +21,7 @@ export const logOut = (
   if (isAuth) {
     setIsAuth(false);
     localStorage.removeItem("authToken");
+    localStorage.removeItem("username");
   }
 };
 

@@ -2,6 +2,7 @@ import axios from "axios";
 import { FormEvent, useContext, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import styled from "styled-components";
+import { emptyError } from "../components/common/constants";
 import FormGroup from "../components/common/form-group/FormGroups";
 import {
   FormButton,
@@ -64,8 +65,6 @@ const Login: React.FunctionComponent<RouteComponentProps> = ({
 
   const login = async (e: FormEvent) => {
     e.preventDefault();
-    const ERROR_SHOW_TIME = 3000;
-    const emptyError = () => setTimeout(() => setError(""), ERROR_SHOW_TIME);
     try {
       const {
         data: { token, leagues, username },
@@ -77,11 +76,12 @@ const Login: React.FunctionComponent<RouteComponentProps> = ({
       userDispatch({ type: "SET_USERNAME", payload: username });
       userDispatch({ type: "SET_LEAGUES", payload: leagues });
       localStorage.setItem("authToken", token);
+      localStorage.setItem("username", username);
       history.push("/home");
     } catch (e) {
       const error = (e as ErrorResponseType).response.data.error;
       setError(error.replace("User validation failed: ", ""));
-      return emptyError();
+      return emptyError(setError);
     }
   };
 

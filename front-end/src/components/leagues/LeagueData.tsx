@@ -9,6 +9,7 @@ import {
   SmallerWidgets,
 } from "./DataElements";
 import dummyStandings from "../dummy/DummyStandings";
+import dummyStandings2 from "../dummy/DummyStandings2";
 import dummyMatches from "../dummy/DummyMatches";
 
 interface PropsT {
@@ -56,32 +57,36 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
 
   useEffect(() => {
     async function getStandings() {
-      // const paramsStandings: StandingsParamsT = {
-      //   league: `${selectedId}`,
-      //   season: "2021",
-      // };
-      // const paramsMatches: MatchParamsT = {
-      //   league: `${selectedId}`,
-      //   season: "2021",
-      // };
-      // const resultStandings = (await getFromApi(
-      //   "/standings",
-      //   paramsStandings
-      // )) as StandingsResponseT[];
-      // const resultMatches = (await getFromApi(
-      //   "/fixtures",
-      //   paramsMatches
-      // )) as MatchesResponseT[];
-      const resultMatches = dummyMatches;
+      const paramsStandings: StandingsParamsT = {
+        league: `${selectedId}`,
+        season: "2021",
+      };
+      const paramsMatches: MatchParamsT = {
+        league: `${selectedId}`,
+        season: "2021",
+      };
+      const resultStandings = (await getFromApi(
+        "/standings",
+        paramsStandings
+      )) as StandingsResponseT[];
+      const resultMatches = (await getFromApi(
+        "/fixtures",
+        paramsMatches
+      )) as MatchesResponseT[];
+      // const resultMatches = dummyMatches;
       let { fixtures, started, results } = getFixtures(resultMatches);
-      // setStandings(
-      //   resultStandings.length
-      //     ? resultStandings[0].league.standings.length
-      //       ? resultStandings[0].league.standings[0]
-      //       : []
-      //     : []
-      // );
-      setStandings(dummyStandings);
+      setStandings(
+        resultStandings.length
+          ? resultStandings[0].league.standings.length
+            ? resultStandings[0].league.standings[0]
+            : []
+          : []
+      );
+      // if (selectedId === 39) {
+      //   setStandings(dummyStandings);
+      // } else {
+      //   setStandings(dummyStandings2);
+      // }
       setFixtures(fixtures);
       setStarted(started);
       setResults(results);

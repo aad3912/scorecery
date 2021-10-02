@@ -17,9 +17,13 @@ import {
   HomeForm,
   HomeH2,
 } from "../components/home/HomeElements";
-import { getAuthHeader, getFromApi } from "../components/common/constants";
-import { dummyLeagues } from "../components/dummy/DummyLeagues";
-import { config, useChain, useSpring, useSpringRef } from "react-spring";
+import {
+  emptyError,
+  getAuthHeader,
+  getFromApi,
+} from "../components/common/constants";
+import dummyLeagues from "../components/dummy/DummyLeagues";
+import { useChain, useSpring, useSpringRef } from "react-spring";
 
 const Home = ({ history }: RouterProps) => {
   const { userState, userDispatch } = useContext(AuthContext);
@@ -32,30 +36,28 @@ const Home = ({ history }: RouterProps) => {
     value: -1,
   });
 
-  const emptyError = () => setTimeout(() => setError(""), 5000);
-
   useEffect(() => {
     async function getLeagues() {
-      // const params: LeagueParamsT = { current: "true" };
-      // const result = (await getFromApi(
-      //   "/leagues",
-      //   params
-      // )) as LeaguesResponseT[];
-      // const leagueSet = new Set(userState.leagues.map((league) => league._id));
-      // setAddOptionsL(
-      //   result
-      //     .filter(
-      //       (match) =>
-      //         !leagueSet.has(match.league.id) && match.league.type === "League"
-      //     )
-      //     .map((match) => {
-      //       return {
-      //         label: `${match.league.name} [${match.country.name}]`,
-      //         value: match.league.id,
-      //       };
-      //     })
-      // );
-      setAddOptionsL(dummyLeagues);
+      const params: LeagueParamsT = { current: "true" };
+      const result = (await getFromApi(
+        "/leagues",
+        params
+      )) as LeaguesResponseT[];
+      const leagueSet = new Set(userState.leagues.map((league) => league._id));
+      setAddOptionsL(
+        result
+          .filter(
+            (match) =>
+              !leagueSet.has(match.league.id) && match.league.type === "League"
+          )
+          .map((match) => {
+            return {
+              label: `${match.league.name} [${match.country.name}]`,
+              value: match.league.id,
+            };
+          })
+      );
+      // setAddOptionsL(dummyLeagues);
     }
     getLeagues();
   }, [userState.leagues]);
@@ -77,7 +79,7 @@ const Home = ({ history }: RouterProps) => {
       const error = (e as ErrorResponseType).response.data.error;
       setError(error);
       setLoading(false);
-      return emptyError();
+      return emptyError(setError);
     }
   };
 
@@ -98,7 +100,7 @@ const Home = ({ history }: RouterProps) => {
       const error = (e as ErrorResponseType).response.data.error;
       setError(error);
       setLoading(false);
-      return emptyError();
+      return emptyError(setError);
     }
   };
 
@@ -109,7 +111,7 @@ const Home = ({ history }: RouterProps) => {
       f();
     } else {
       setError("Please wait for previous operation to finish...");
-      return emptyError();
+      return emptyError(setError);
     }
   };
 
