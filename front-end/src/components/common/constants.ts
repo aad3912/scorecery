@@ -20,3 +20,6 @@ export const getFromApi = async (
   }
   return result;
 };
+
+export const getAuthHeader = () =>
+  `Bearer ${localStorage.getItem("authToken")}`;
