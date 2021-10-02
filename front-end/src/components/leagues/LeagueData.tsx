@@ -56,38 +56,37 @@ const LeagueWidgets = ({ selectedId }: PropsT) => {
 
   useEffect(() => {
     async function getStandings() {
-      const paramsStandings: StandingsParamsT = {
-        league: `${selectedId}`,
-        season: "2021",
-      };
-      const paramsMatches: MatchParamsT = {
-        league: `${selectedId}`,
-        season: "2021",
-      };
-      const resultStandings = (await getFromApi(
-        "/standings",
-        paramsStandings
-      )) as StandingsResponseT[];
-      const resultMatches = (await getFromApi(
-        "/fixtures",
-        paramsMatches
-      )) as MatchesResponseT[];
-      console.log(resultMatches);
-      // const result = dummyMatches;
+      // const paramsStandings: StandingsParamsT = {
+      //   league: `${selectedId}`,
+      //   season: "2021",
+      // };
+      // const paramsMatches: MatchParamsT = {
+      //   league: `${selectedId}`,
+      //   season: "2021",
+      // };
+      // const resultStandings = (await getFromApi(
+      //   "/standings",
+      //   paramsStandings
+      // )) as StandingsResponseT[];
+      // const resultMatches = (await getFromApi(
+      //   "/fixtures",
+      //   paramsMatches
+      // )) as MatchesResponseT[];
+      const resultMatches = dummyMatches;
       let { fixtures, started, results } = getFixtures(resultMatches);
-      setStandings(
-        resultStandings.length
-          ? resultStandings[0].league.standings.length
-            ? resultStandings[0].league.standings[0]
-            : []
-          : []
-      );
+      // setStandings(
+      //   resultStandings.length
+      //     ? resultStandings[0].league.standings.length
+      //       ? resultStandings[0].league.standings[0]
+      //       : []
+      //     : []
+      // );
+      setStandings(dummyStandings);
       setFixtures(fixtures);
       setStarted(started);
       setResults(results);
       setRetrieved(true);
       // setTimeout(getStandings, 10000);
-      // setStandings(dummyStandings);
     }
     getStandings();
   }, [selectedId]);
