@@ -22,6 +22,7 @@ app.use(express.json()); // Populates req.body
 /* Connect Routes */
 app.use("/api/auth", authRouter); // auth
 app.use("/api/", privateRouter); // private route
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") {
   const __dirname = dirname(fileURLToPath(import.meta.url));
   app.use(express.static(path.join(__dirname, "front-end", "build")));

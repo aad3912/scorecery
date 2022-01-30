@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   server:
-    env_file: "./server/.env"
+    env_file: ".env"
     container_name: api
     build:
       context: ./server
