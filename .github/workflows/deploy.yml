@@ -6,6 +6,12 @@ on:
 
 jobs:
   deploy:
+    environment:
+      - JWT_EXPIRE=${{ secrets.JWT_EXPIRE }}
+      - JWT_SECRET={{ secrets.JWT_SECRET }}
+      - MONGO_URI={{ secrets.MONGO_URI }}
+      - NODE_ENV={{ {{ secrets.NODE_ENV }} }}
+      - PORT={{ secrets.PORT }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
