@@ -33,7 +33,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: scorecery
           version_label: "scorecery-${{ steps.format-time.outputs.replaced }}"
-          environment_name: Scorecery-env
+          environment_name: Scorecery-env-1
           region: eu-west-2
           deployment_package: deploy.zip
 
